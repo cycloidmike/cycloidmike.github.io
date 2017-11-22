@@ -1,18 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <link rel="stylesheet" href="style.css">
-  
-  <ul class="share-buttons">
-    <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.michaelluong.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="images/social_flat_rounded_rects_svg/Facebook.svg" /></a></li>
-    <li><a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.michaelluong.com" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Google+" src="images/social_flat_rounded_rects_svg/Google+.svg" /></a></li>
-    <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fwww.michaelluong.com&title=&summary=&source=http%3A%2F%2Fwww.michaelluong.com" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img alt="Share on LinkedIn" src="images/social_flat_rounded_rects_svg/LinkedIn.svg" /></a></li>
-    <li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fwww.michaelluong.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="images/social_flat_rounded_rects_svg/Email.svg" /></a></li>
-  </ul>
-  
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+{% seo %}
+  </head>
+
   <body>
-    <h1>Michael Luong</h1>
-    <a href="mailto:LuongMichaelD@gmail.com">LuongMichaelD@gmail.com</a>
-    <p>Welcome to my personal home page</p>
+
+    <header>
+      <div class="container">
+        <h1>{{ site.title | default: Michael Luong }}</h1>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        {{ content }}
+      </section>
+    </div>
+
+    {% if site.google_analytics %}
+      <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
   </body>
-  
 </html>
