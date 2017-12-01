@@ -5,7 +5,7 @@ layout: default
 # How to set up a personal website using AWS Route 53 and GitHub Pages
 
 1. Create a GitHub account
-  - [https://github.com/](https://github.com/)
+  - [https://github.com/]({% link https://github.com/ %})
   
 2. Create a new repository and name it _{username}_.github.io where _{username}_ is your github user name
   - [https://github.com/new](https://github.com/new)
