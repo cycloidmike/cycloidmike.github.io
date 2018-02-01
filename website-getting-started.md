@@ -32,5 +32,6 @@ layout: default
   - All you need is an index.html in your repo or you can use a built in Jekyll theme
 13. Go to your domain and enjoy
 
+###Update- I've switched over to Google Domains because Route 53 does not support routing of apex domains and the first million queries are included with registering the domain to Google.
 
 [back](./)
