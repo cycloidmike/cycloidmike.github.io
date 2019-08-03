@@ -8,4 +8,6 @@ layout: default
 
 I'm an avid problem solver and tinkerer. I'm excited and eager to collect and use data to build predictive models. 
 
+-Updated website to support and enforce SSL
+
 
