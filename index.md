@@ -4,6 +4,8 @@ layout: default
 
 [How I started this website](website-getting-started)
 
-[My resume](Michael_Luong_Resume.pdf) - Last updated 2018-03-14 
+[My resume](Michael_Luong_Resume.pdf) - Last updated 2019-08-03 
 
-I'm a tinkerer who is passionate about algorithms and optimization. I'm currently looking to apply myself to the new frontier of machine learning
+I'm an avid problem solver and tinkerer. I'm excited and eager to collect and use data to build predictive models. 
+
+
