@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.5in,top=0.5in,right=0.5in,bottom=0.5in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+
+\name{\href{http://MichaelLuong.com}{Michael D Luong}} % Your name
+%\address{123 Pleasant Lane \\ City, State 12345} % Your secondary address (optional)
+\address{\href{mailto://Email@MichaelLuong.com}{Email@MichaelLuong.com} \\ Seattle, WA} % Your phone number and email
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Work Experience}
+
+\begin{rSubsection}{Amazon - Alexa}{July 2018 - Present}{Software Development Engineer}{Seattle, WA}
+\begin{itemize}
+    \item \textbf{Alexa Contact Us:} Prevented developer contact submission and eliminated manual routing of contact cases. Lead engineer for externally facing site for developers to see self help material before submitting a contact. Designed the APIs, data flow, data storage, front-end and back-end servers which handled dynamic page rendering based on selected topics, dynamic team email mapping, dynamic metric collection and measuring deflection from self help links.
+    \item \textbf{Unpublish service:} Eliminated the need for developers to submit a case to us when they wanted to hide or remove their skill. Reduced suppression contacts by over 95\%. Lead engineer for new services to give the developers the ability to hard/suppress their skills and to provide a reason why they choose to do so. 
+\end{itemize}
+\end{rSubsection}
+
+%----------------------------------------------------------------------------------------
+%	Liberty Mutual
+%----------------------------------------------------------------------------------------
+
+\begin{rSubsection}{Liberty Mutual Insurance - eService}{March 2018 - June 2018}{Software Developer / Machine Learning Engineer}{Boston, MA}
+\begin{itemize}
+    \item \textbf{Renewal:} Organized, filtered and combined data sources to answer business questions and created a likeliness of renewal model for next best action - Python, Scikit-learn, Omniture, Opinion Labs
+    \item \textbf{Service Website:} Created dozens of features using A/B tests to design a user friendly website. We would evaluate tests periodically to hypothesize and build features. Impact is that the user would spend less time on the website and not call. JS, React, Adobe Anaytics, Omniture
+\end{itemize}
+\end{rSubsection}
+
+\begin{rSubsection}{Liberty Mutual Insurance - eSales}{Oct 2015 - March 2018}{Full Stack Developer}{Boston, MA}
+\begin{itemize}
+    \item \textbf{Strategic Revenue Generation:} Increased profit by designing an alternative revenue source by selling leads. Worked with third party vendors for contract negations, SLAs, and security reviews.
+    \item \textbf{Next Best Action:} Created a model around the customer to provide a more personalized experience and to improve user satisfaction. The flow and questions would change based on questions answered earlier in the interview as well as marketing cookies found on the browser.
+    \item \textbf{Offline Handling:} Increased user satisfaction and conversion rate by detecting, notifying and managing network calls of dropped internet connections and resumed services when possible.
+    \item \textbf{A/B Testing:} Hypothesized, developed, coordinated and lead dozens of tests to validate flows, content, questions, styles, layouts, prefilled information and ad display. This allowed us to build a better application by directly measuring user behavior.
+    \item \textbf{POD:} Designed a modular framework in parallel to the main quoting application for more rapid hypothesis testing platform. It was used for testing and proving different technologies to see if they could be incorporated back into the main application - JS, ReactJS, WebSockets, NodeJS, Express
+\end{itemize}
+\end{rSubsection}
+
+\begin{rSubsection}{Liberty Mutual Insurance - Surety}{Jan 2011 - March 2015}{Software Developer}{Plymouth Meeting, PA}
+\begin{itemize}
+    \item \textbf{Execute:} Lead developer of surety forms. Website for storing, searching, saving, editing, reviewing and archiving PDFs. In charge of front-end, back-end, networking, load balancing, CI/CD, database optimization. Oversaw integration with new PDF renderer and SSO. Java, Struts 1, DB2, Adobe LiveCycle, WebSphere
+    \item \textbf{Workbench:} Primary surety forms platform. Allowed internal employees to answer job specific forms
+\end{itemize}
+\end{rSubsection}
+
+\end{rSection}
+
+\end{document}
