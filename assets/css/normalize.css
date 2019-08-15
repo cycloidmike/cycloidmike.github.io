@@ -351,3 +351,11 @@ template {
 [hidden] {
   display: none;
 }
+
+button {
+  color: black;
+  background-color: orange;
+  width: 20%;
+  height: 40px;
+}
+
