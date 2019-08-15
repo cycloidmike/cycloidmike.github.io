@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <!-- Add your site or application content here -->
-  <h1>What would this print out?</h1>
-  <pre>
+<!-- Add your site or application content here -->
+<h1>What would this print out?</h1>
+<pre>
     <code>
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -46,8 +46,7 @@ class Person {
     }
 
     /**
-     * Code to make this work, you can ignore everything below line
-     * I had to make sure everything compiled
+     * Code to make this work, I had to make sure everything compiled
      */
     private enum ATTRIBUTES {
         Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Cheerful,
@@ -63,7 +62,7 @@ class Person {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             String decision = bufferedReader.readLine();
             throw new WhatDoYouSay(decision);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.print("Failed or interrupted I/O operations. Please try again");
         }
     }
@@ -72,6 +71,7 @@ class Person {
     private static Random random = new Random();
 
     static Set&lt;String&gt; YES = new HashSet<>();
+
     static {
         String[] PositiveResponses = {"YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
                 "YEP", "YUP", "YAAAAAS", "TOTES", "YOU BET", "CERTAINLY", "DEFINITELY", "GLADLY", "AYE",
@@ -88,11 +88,11 @@ class Person {
     </code>
   </pre>
 
-  <h3>What is the output?</h3>
-  <form method="POST" action="https://formspree.io/clairesAnswer@MichaelLuong.com">
-    <textarea name="message" placeholder="System output"></textarea>
-    <button type="submit">Email answer</button>
-  </form>
+<h3>What is the output?</h3>
+<form method="POST" action="https://formspree.io/clairesAnswer@MichaelLuong.com">
+  <textarea name="message" placeholder="System output"></textarea>
+  <button type="submit">Email answer</button>
+</form>
 
 </body>
 </html>
