@@ -4,6 +4,9 @@ layout: default
 
 # How to set up a personal website using AWS Route 53 and GitHub Pages
 
+### Update- I've switched over to [Google Domains](https://domains.google/#/)
+ - Google supports apex domains and the first million queries are included
+ 
 1. Create a GitHub account
   - [https://github.com/](https://github.com/)
   
@@ -32,7 +35,5 @@ layout: default
   - All you need is an index.html in your repo or you can use a built in Jekyll theme
 13. Go to your domain and enjoy
 
-### Update- I've switched over to [Google Domains](https://domains.google/#/)
- - Route 53 does not support routing of apex domains and the first million queries are included
 
 [back](./)
