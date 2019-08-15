@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>What is the output?</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!-- Add your site or application content here -->
+  <h1>What would this print out?</h1>
+  <pre>
+    <code>
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
+class Person {
+    public static void main(String[] args) {
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat date = new SimpleDateFormat("24-08-2019 15:00:00"); //UTC time (10 AM PDT)
+        if (date.format(calendar.getTime()).equals(new Date())) {
+            Person Mike = new Person(true, ATTRIBUTES.Generous, ATTRIBUTES.Trustworthy,
+                    ATTRIBUTES.Courageous, ATTRIBUTES.Genuine, ATTRIBUTES.Ambitious);
+            try{
+                if (Mike.wouldLikeToGoOnADateWithClaire) {
+                    throw new whatToDoYouSay();
+                }
+            } catch (whatToDoYouSay decision) {
+                if(decision.toString().equals("YES")) {
+                    String[] DateOptions = {"Adventurous Hike", "Fancy Dinner", "Swing Dancing", "Board Games",
+                            "Movie Theater", "Mario Kart", "Bike Ride", "Watch Musical", "Sky Dive", "Go Sailing",
+                            "Rock Climb", "Visit Leavenworth", "Wild Waves", "Visit Tacoma", "Hot Air Balloon"};
+
+                    System.out.print(DateOptions[random.nextInt(DateOptions.length)]);
+                } else {
+                    System.out.print("heart.break()");
+                }
+            }
+        }
+    }
+
+    // Code to make this work, you can ignore everything below line
+    private static enum ATTRIBUTES {
+        Achiever, Exciting, Adorable, Pleasant, Sensible, Adaptable, Flexible, Mediator,
+        Positive, Sensitive, Ambitious, Focused, Modest, Practical, Sincere, Balanced, Forgiving,
+        Organized, Proactive, Skilled, Cheerful, Generous, Original, Productive, Solid, Consistent,
+        Genuine, Outgoing, Professional, Sporty, Cooperative, Helpful, Particular, Quality, Thoughtful,
+        Courageous, Insightful, Patient, Quick, Trustworthy, Curious, Interesting, Perceptive, Racy,
+        Understanding, Devoted, Inventive, Personable, Responsible, Warm, Smart, Strong
+    }
+
+    private boolean wouldLikeToGoOnADateWithClaire;
+    private ATTRIBUTES[] personalAttributes;
+    static Random random = new Random();
+
+    Person(boolean wouldLikeToGoOnADateWithClaire, ATTRIBUTES... attributes) {
+        this.wouldLikeToGoOnADateWithClaire = wouldLikeToGoOnADateWithClaire;
+        this.personalAttributes = attributes;
+    }
+
+    static class whatToDoYouSay extends Exception {}
+}
+    </code>
+  </pre>
+
+  <h3>What is the output?</h3>
+  <form method="POST" action="https://formspree.io/clairesAnswer@MichaelLuong.com">
+    <textarea name="message" placeholder="System output"></textarea>
+    <button type="submit">Email answer</button>
+  </form>
+
+</body>
+
+</html>
