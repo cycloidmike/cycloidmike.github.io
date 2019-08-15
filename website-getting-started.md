@@ -13,8 +13,8 @@ layout: default
 
 3. Create an AWS account and register a domain
   - [https://console.aws.amazon.com/route53/home?DomainRegistration](https://console.aws.amazon.com/route53/home?DomainRegistration)
-  - It costed me $12 for a .com top level domain
-  - Hosting it in Route 53 costs me $0.51 per month
+  - $12 for a .com top level domain
+  - Using Route 53 costs an additional $0.51 per month
     - $0.50 fixed cost to add my domain to their hosting service
     - $0.01 variable cost of $0.40 per 1,000,000 queries
     - Current prices - [https://aws.amazon.com/route53/pricing/](https://aws.amazon.com/route53/pricing/)
@@ -33,6 +33,6 @@ layout: default
 13. Go to your domain and enjoy
 
 ### Update- I've switched over to [Google Domains](https://domains.google/#/)
- - Route 53 does not support routing of apex domains and the first million queries are included with registering the domain through Google
+ - Route 53 does not support routing of apex domains and the first million queries are included
 
 [back](./)
