@@ -182,7 +182,14 @@ textarea {
 }
 
 textarea{
-  margin-top: 0px; margin-bottom: 0px; height: 100px; width: 80%;
+  margin-top: 0px; margin-bottom: 0px; height: 100px; width: 70%;
+}
+
+button {
+  color: black;
+  background-color: orange;
+  width: 20%;
+  height: 40px;
 }
 
 /* ==========================================================================
