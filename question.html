@@ -4,12 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>What is the output?</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="manifest" href="site.webmanifest">
-  <!-- Place favicon.ico in the root directory -->
-
   <link rel="stylesheet" href="assets/css/main.css">
 
   <meta name="theme-color" content="#fafafa">
@@ -20,33 +14,30 @@
   <h1>What would this print out?</h1>
   <pre>
     <code>
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 class Person {
-
-    Person(boolean wouldLikeToDateClaire, ATTRIBUTES... attributes) {
-        this.wouldLikeToDateClaire = wouldLikeToDateClaire;
-        this.personalAttributes = attributes;
-    }
-
     public static void main(String[] args) {
         SimpleDateFormat date = new SimpleDateFormat("24-08-2019 15:00:00");//Aug 24, 2019 @ 10AM PDT
         if (date.get2DigitYearStart().equals(new Date())) {
-            Person Mike = new Person(true, ATTRIBUTES.Generous, ATTRIBUTES.Trustworthy,
-                    ATTRIBUTES.Courageous, ATTRIBUTES.Interesting, ATTRIBUTES.Ambitious);
-            try {
-                if (Mike.wouldLikeToDateClaire) {
-                    throw new WhatToDoYouSay();
-                }
-            } catch (WhatToDoYouSay decision) {
-                if (decision.toString().toUpperCase().equals("YES")) {
-                    String[] DateOptions = {"Adventurous Hike", "Fancy Dinner", "Swing Dancing",
-                            "Bike Ride", "See Musical", "Sky Dive", "Go Sailing",
-                            "Rock Climb", "Visit Leavenworth", "Hot Air Balloon"};
+            Person Mike = new Person(ATTRIBUTES.Generous, ATTRIBUTES.Sincere,
+                    ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious);
 
-                    System.out.print(decision.getMessage() + DateOptions[random.nextInt(DateOptions.length)]);
+            Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring,
+                    ATTRIBUTES.Determined, ATTRIBUTES.Pretty, ATTRIBUTES.Ambitious);
+            try {
+                Mike.wouldLikeToDate(Claire);
+
+            } catch (WhatDoYouSay decision) {
+                if (YES.contains(decision.toString().toUpperCase())) {
+                    String[] DateChoices = {"Adventurous Hike", "Fancy Dinner", "Swing Dancing",
+                            "Bike Ride", "See Musical", "Sky Dive", "Go Sailing",
+                            "Rock Climb", "Visit Leavenworth", "Surprise Me"};
+
+                    System.out.print(decision.getMessage() + DateChoices[random.nextInt(DateChoices.length)]);
                 } else {
                     System.out.print("heart.break()");
                 }
@@ -58,16 +49,40 @@ class Person {
      * Code to make this work, you can ignore everything below line
      * I had to make sure everything compiled
      */
-    private static enum ATTRIBUTES {
-        Positive, Sensitive, Ambitious, Focused, Quick, Trustworthy, Curious, Interesting,
-        Organized, Skilled, Cheerful, Generous, Cooperative, Courageous, Insightful, Patient
+    private enum ATTRIBUTES {
+        Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Cheerful,
+        Generous, Cooperative, Courageous, Insightful, Patient, Kind, Determined, Pretty, Caring
+    }
+
+    Person(ATTRIBUTES... attributes) {
+        this.personalAttributes = attributes;
+    }
+
+    private void wouldLikeToDate(Person person) throws WhatDoYouSay {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            String decision = bufferedReader.readLine();
+            throw new WhatDoYouSay(decision);
+        }catch(Exception e){
+            System.out.print("Failed or interrupted I/O operations. Please try again");
+        }
     }
 
     private ATTRIBUTES[] personalAttributes;
-    private boolean wouldLikeToDateClaire;
     private static Random random = new Random();
 
-    static class WhatToDoYouSay extends Exception {
+    static Set&lt;String&gt; YES = new HashSet<>();
+    static {
+        String[] PositiveResponses = {"YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
+                "YEP", "YUP", "YAAAAAS", "TOTES", "YOU BET", "CERTAINLY", "DEFINITELY", "GLADLY", "AYE",
+                "OBVIOUSLY", "OK", ":)", ":D", "=)", "=D"};
+        YES.addAll(Arrays.asList(PositiveResponses));
+    }
+
+    static class WhatDoYouSay extends Exception {
+        WhatDoYouSay(String message) {
+            super(message);
+        }
     }
 }
     </code>
@@ -80,5 +95,4 @@ class Person {
   </form>
 
 </body>
-
 </html>
