@@ -14,33 +14,42 @@
 <h1>What would this print out?</h1>
 <pre>
     <code>
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 class Person {
     public static void main(String[] args) {
-        SimpleDateFormat date = new SimpleDateFormat("24-08-2019 15:00:00");//Aug 24, 2019 @ 10AM PDT
-        if (date.get2DigitYearStart().equals(new Date())) {
-            Person Mike = new Person(ATTRIBUTES.Generous, ATTRIBUTES.Sincere,
-                    ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious);
 
-            Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring,
-                    ATTRIBUTES.Determined, ATTRIBUTES.Pretty, ATTRIBUTES.Ambitious);
-            try {
-                Mike.wouldLikeToDate(Claire);
+        Person Mike = new Person(ATTRIBUTES.Generous, ATTRIBUTES.Sincere, ATTRIBUTES.Strong,
+                ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious);
 
-            } catch (WhatDoYouSay decision) {
-                if (YES.contains(decision.toString().toUpperCase())) {
-                    String[] DateChoices = {"Adventurous Hike", "Fancy Dinner", "Swing Dancing",
-                            "Bike Ride", "See Musical", "Sky Dive", "Go Sailing",
-                            "Rock Climb", "Visit Leavenworth", "Surprise Me"};
+        Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring, ATTRIBUTES.GreatCook,
+                ATTRIBUTES.Determined, ATTRIBUTES.Attractive, ATTRIBUTES.Ambitious, ATTRIBUTES.Smart,
+                ATTRIBUTES.Nerdy, ATTRIBUTES.BeautifulSingingVoice);
+        try {
+            Mike.wouldLikeToDate(Claire);
 
-                    System.out.print(decision.getMessage() + DateChoices[random.nextInt(DateChoices.length)]);
+        } catch (WhatDoYouSay decision) {
+            if (YES.contains(decision.toString().toUpperCase())) {
+                DateDate date = new DateDate("24-08-2019 15:00:00");//Aug 24, 2019 @ 10AM PDT
+                String[] DateChoices = {"Adventurous Hike", "Fancy Dinner", "Swing Dance",
+                        "Bike Ride", "Watch Musical", "Sky Dive", "Rock Climb", "Visit Leavenworth",
+                        "Surprise Me"};
+
+                if (date.worksFor(Claire) && StringUtils.isNotBlank(Claire.picksActivity(DateChoices))) {
+                    System.out.print(decision.getMessage() + Claire.picksActivity(DateChoices));
+
                 } else {
-                    System.out.print("heart.break()");
+                    System.out.print("Let's try for another time and/or let's do something not listed");
+
                 }
+            } else {
+                System.out.print("Mike.heart.break()");
             }
         }
     }
@@ -48,49 +57,73 @@ class Person {
     /**
      * Code to make this work, I had to make sure everything compiled
      */
+    private ATTRIBUTES[] personalAttributes;
+    private static Random random = new Random();
+    private static Set&lt;String&gt; YES = new HashSet<>();
+
+    static {
+        String[] PositiveResponses = {"SURE", "YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
+                "YEP", "YUP", "YAAAAAS", "TOTES", "YOU BET", "DEFINITELY", "GLADLY", "AYE", "OBVIOUSLY", "OK"};
+        YES.addAll(Arrays.asList(PositiveResponses));
+    }
+
     private enum ATTRIBUTES {
-        Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Cheerful,
-        Generous, Cooperative, Courageous, Insightful, Patient, Kind, Determined, Pretty, Caring
+        Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Strong,
+        Generous, Cooperative, Courageous, Insightful, Patient, Kind, Determined, Beautiful, Caring,
+        GreatCook, BeautifulSingingVoice, Funny, Smart, Attractive, Nerdy
     }
 
     Person(ATTRIBUTES... attributes) {
         this.personalAttributes = attributes;
     }
 
-    private void wouldLikeToDate(Person person) throws WhatDoYouSay {
+    private static String readLine() {
+        String input = "";
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String decision = bufferedReader.readLine();
-            throw new WhatDoYouSay(decision);
-        } catch (Exception e) {
+            input = bufferedReader.readLine();
+        } catch (IOException e) {
             System.out.print("Failed or interrupted I/O operations. Please try again");
         }
+        return input;
     }
 
-    private ATTRIBUTES[] personalAttributes;
-    private static Random random = new Random();
+    String picksActivity(String[] DateOptions) {
+        String dateActivity = "";
 
-    static Set&lt;String&gt; YES = new HashSet<>();
-
-    static {
-        String[] PositiveResponses = {"YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
-                "YEP", "YUP", "YAAAAAS", "TOTES", "YOU BET", "CERTAINLY", "DEFINITELY", "GLADLY", "AYE",
-                "OBVIOUSLY", "OK", ":)", ":D", "=)", "=D"};
-        YES.addAll(Arrays.asList(PositiveResponses));
+        return dateActivity;
     }
 
-    static class WhatDoYouSay extends Exception {
+    class WhatDoYouSay extends Exception {
         WhatDoYouSay(String message) {
             super(message);
         }
+    }
+
+    static class DateDate extends SimpleDateFormat {
+        DateDate(String date) {
+            super(date);
+        }
+
+        public boolean worksFor(Person person) {
+            String dateDecision = readLine().toUpperCase();
+            return YES.contains(dateDecision);
+        }
+    }
+
+    private void wouldLikeToDate(Person person) throws WhatDoYouSay {
+        String decision = readLine();
+        throw new WhatDoYouSay(decision);
     }
 }
     </code>
   </pre>
 
-<h3>What is the output?</h3>
+<h3>What would this print out?</h3>
 <form method="POST" action="https://formspree.io/clairesAnswer@MichaelLuong.com">
-    <textarea name="message" placeholder="System output"></textarea>
+    <label>
+        <textarea name="message" placeholder="One Second..."></textarea>
+    </label>
     <button type="submit">Email answer</button>
 </form>
 
