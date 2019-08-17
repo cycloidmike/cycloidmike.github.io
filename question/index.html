@@ -26,24 +26,25 @@ class Person {
     public static void main(String[] args) {
 
         Person Mike = new Person(ATTRIBUTES.Generous, ATTRIBUTES.Sincere, ATTRIBUTES.Strong,
-                ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious);
+                ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious, ATTRIBUTES.Thoughtful);
 
         Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring, ATTRIBUTES.Beautiful,
                 ATTRIBUTES.Determined, ATTRIBUTES.Attractive, ATTRIBUTES.Ambitious, ATTRIBUTES.Smart,
-                ATTRIBUTES.Nerdy, ATTRIBUTES.GreatSinger, ATTRIBUTES.GreatCook);
+                ATTRIBUTES.Nerdy, ATTRIBUTES.GreatSinger, ATTRIBUTES.AmazingCook);
 
         try {
             Mike.wouldLikeToDate(Claire);
 
         } catch (WhatDoYouSay decision) {
             if (YES.contains(decision.toString().toUpperCase())) {
-                DateDate date = new DateDate("24-08-2019 15:00:00"); //Aug 24, 2019 @ 10AM PDT
+                DateDate date = new DateDate("24-08-2019 15:00:00");//Aug 24, 2019 @ 10AM PDT
                 String[] DateChoices = {"Adventurous Hike", "Fancy Dinner", "Swing Dance",
                         "Bike Ride", "Watch Musical", "Sky Dive", "Rock Climb", "Visit Leavenworth",
                         "Surprise Me"};
 
-                if (date.worksFor(Claire) && StringUtils.isNotBlank(Claire.picksActivity(DateChoices))) {
-                    System.out.print(decision.getMessage() + Claire.picksActivity(DateChoices));
+                String dateChoice = Claire.picksActivity(DateChoices);
+                if (date.worksFor(Claire) && StringUtils.isNotBlank(dateChoice)) {
+                    System.out.print(decision.getMessage() + dateChoice);
 
                 } else {
                     System.out.print("Let's try for another time and/or let's do something not listed");
@@ -58,6 +59,7 @@ class Person {
     /**
      * Code to make this work, I had to make sure everything compiled
      */
+
     private ATTRIBUTES[] personalAttributes;
     private static Random random = new Random();
     private static Set&lt;String&gt; YES = new HashSet<>();
@@ -71,7 +73,7 @@ class Person {
     private enum ATTRIBUTES {
         Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Strong,
         Generous, Cooperative, Courageous, Insightful, Patient, Kind, Determined, Beautiful, Caring,
-        GreatCook, GreatSinger, Funny, Smart, Attractive, Nerdy
+        AmazingCook, GreatSinger, Funny, Smart, Attractive, Nerdy, Thoughtful
     }
 
     private Person(ATTRIBUTES... attributes) {
@@ -92,8 +94,10 @@ class Person {
     private String picksActivity(String[] DateOptions) {
         String dateActivity = readLine();
         HashSet DateOptionsSet = new HashSet(Arrays.asList(DateOptions));
-        while (!DateOptionsSet.contains(dateActivity)) {
+        int tries = 3;
+        while (tries > 0 && !DateOptionsSet.contains(dateActivity)) {
             dateActivity = readLine();
+            tries--;
         }
         return dateActivity;
     }
