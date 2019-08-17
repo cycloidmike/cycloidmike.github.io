@@ -28,9 +28,10 @@ class Person {
         Person Mike = new Person(ATTRIBUTES.Generous, ATTRIBUTES.Sincere, ATTRIBUTES.Strong,
                 ATTRIBUTES.Courageous, ATTRIBUTES.Adventurous, ATTRIBUTES.Ambitious);
 
-        Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring, ATTRIBUTES.GreatCook,
+        Person Claire = new Person(ATTRIBUTES.Trustworthy, ATTRIBUTES.Caring, ATTRIBUTES.Beautiful,
                 ATTRIBUTES.Determined, ATTRIBUTES.Attractive, ATTRIBUTES.Ambitious, ATTRIBUTES.Smart,
-                ATTRIBUTES.Nerdy, ATTRIBUTES.BeautifulSingingVoice);
+                ATTRIBUTES.Nerdy, ATTRIBUTES.GreatSinger, ATTRIBUTES.GreatCook);
+
         try {
             Mike.wouldLikeToDate(Claire);
 
@@ -59,7 +60,7 @@ class Person {
      */
     private ATTRIBUTES[] personalAttributes;
     private static Random random = new Random();
-    private static Set&lt;String&gt; YES = new HashSet<>();
+    private static Set<String> YES = new HashSet<>();
 
     static {
         String[] PositiveResponses = {"SURE", "YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
@@ -70,10 +71,10 @@ class Person {
     private enum ATTRIBUTES {
         Positive, Sincere, Ambitious, Focused, Trustworthy, Curious, Adventurous, Skilled, Strong,
         Generous, Cooperative, Courageous, Insightful, Patient, Kind, Determined, Beautiful, Caring,
-        GreatCook, BeautifulSingingVoice, Funny, Smart, Attractive, Nerdy
+        GreatCook, GreatSinger, Funny, Smart, Attractive, Nerdy
     }
 
-    Person(ATTRIBUTES... attributes) {
+    private Person(ATTRIBUTES... attributes) {
         this.personalAttributes = attributes;
     }
 
@@ -88,13 +89,16 @@ class Person {
         return input;
     }
 
-    String picksActivity(String[] DateOptions) {
-        String dateActivity = "";
-
+    private String picksActivity(String[] DateOptions) {
+        String dateActivity = readLine();
+        HashSet DateOptionsSet = new HashSet(Arrays.asList(DateOptions));
+        while (!DateOptionsSet.contains(dateActivity)) {
+            dateActivity = readLine();
+        }
         return dateActivity;
     }
 
-    class WhatDoYouSay extends Exception {
+    static class WhatDoYouSay extends Exception {
         WhatDoYouSay(String message) {
             super(message);
         }
