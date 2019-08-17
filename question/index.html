@@ -36,7 +36,7 @@ class Person {
             Mike.wouldLikeToDate(Claire);
 
         } catch (WhatDoYouSay decision) {
-            if (YES.contains(decision.toString().toUpperCase())) {
+            if (PositiveResponse.contains(decision.toString())) {
                 DateDate date = new DateDate("24-08-2019 15:00:00");//Aug 24, 2019 @ 10AM PDT
                 String[] DateChoices = {"Adventurous Hike", "Fancy Dinner", "Swing Dance",
                         "Bike Ride", "Watch Musical", "Sky Dive", "Rock Climb", "Visit Leavenworth",
@@ -47,7 +47,7 @@ class Person {
                     System.out.print(decision.getMessage() + dateChoice);
 
                 } else {
-                    System.out.print("Let's try for another time and/or let's do something not listed");
+                    System.out.print("Let's try for another time and/or do something not listed");
 
                 }
             } else {
@@ -62,12 +62,12 @@ class Person {
 
     private ATTRIBUTES[] personalAttributes;
     private static Random random = new Random();
-    private static Set&lt;String&gt; YES = new HashSet<>();
+    private static Set&lt;String&gt; PositiveResponse = new HashSet<>();
 
     static {
-        String[] PositiveResponses = {"SURE", "YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
+        String[] YES = {"SURE", "YA", "OF COURSE", "HECK YEAH", "YES", "ONE SECOND", "ABSOLUTELY",
                 "YEP", "YUP", "YAAAAAS", "TOTES", "YOU BET", "DEFINITELY", "GLADLY", "AYE", "OBVIOUSLY", "OK"};
-        YES.addAll(Arrays.asList(PositiveResponses));
+        PositiveResponse.addAll(Arrays.asList(YES));
     }
 
     private enum ATTRIBUTES {
@@ -115,12 +115,12 @@ class Person {
 
         public boolean worksFor(Person person) {
             String dateDecision = readLine().toUpperCase();
-            return YES.contains(dateDecision);
+            return PositiveResponse.contains(dateDecision);
         }
     }
 
     private void wouldLikeToDate(Person person) throws WhatDoYouSay {
-        String decision = readLine();
+        String decision = readLine().toUpperCase();
         throw new WhatDoYouSay(decision);
     }
 }
