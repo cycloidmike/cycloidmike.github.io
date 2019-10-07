@@ -5,7 +5,7 @@ layout: default
 # How to set up a personal website using AWS Route 53 and GitHub Pages
 
 ### Update- I've switched over to [Google Domains](https://domains.google/#/)
- - Google supports apex domains and the first million queries are included
+ - Google supports apex domains (meaning that it can route using just the domain) and the first million queries are included
  
 1. Create a GitHub account
   - [https://github.com/](https://github.com/)
@@ -14,6 +14,13 @@ layout: default
   - [https://github.com/new](https://github.com/new)
   - Your source code will be accessible to the public but it's **free**. You also have the option to upgrade your account to create private repos.
 
+3. Register a domain
+  - [https://domains.google.com/m/registrar/search](https://domains.google.com/m/registrar/search)
+  - 
+  
+  --- to be continued
+
+(Old AWS steps)
 3. Create an AWS account and register a domain
   - [https://console.aws.amazon.com/route53/home?DomainRegistration](https://console.aws.amazon.com/route53/home?DomainRegistration)
   - $12 for a .com top level domain
