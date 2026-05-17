@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>London — July 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a18;
+    --paper: #f4f1eb;
+    --red: #A32D2D;
+    --blue: #185FA5;
+    --muted: #7a7570;
+    --light: #e8e3d8;
+    --green: #2a5e2a;
+    --gold: #8a6a00;
+  }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; max-width: 860px; margin: 0 auto; padding: 0 0 60px; }
+  a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(24,95,165,0.3); }
+  a:hover { border-color: var(--blue); }
+
+  /* NAV */
+  .site-nav { background: #2C2C2A; padding: 12px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .site-nav a { color: rgba(244,241,235,0.7); border: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+  .site-nav a:hover { color: #f4f1eb; }
+  .site-nav .nav-title { color: #f4f1eb; font-size: 14px; font-weight: 500; }
+  .nav-links { display: flex; gap: 24px; }
+
+  /* HEADER */
+  .header { background: #2C2C2A; color: #f4f1eb; padding: 48px 48px 40px; position: relative; overflow: hidden; }
+  .header::before { content: '🇬🇧'; position: absolute; right: 30px; top: 10px; font-size: 110px; opacity: 0.07; line-height: 1; pointer-events: none; }
+  .trip-title { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 8px; }
+  .trip-subtitle { font-size: 13px; color: rgba(244,241,235,0.5); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .htag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(244,241,235,0.85); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+
+  /* OVERVIEW */
+  .overview { background: var(--light); padding: 20px 48px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .ov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 14px; margin-top: 10px; }
+  .ov-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 500; margin-bottom: 2px; }
+  .ov-value { font-size: 14px; font-weight: 500; }
+  .overview h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+
+  /* BOOK NOW */
+  .book-now { background: white; padding: 18px 48px; border-bottom: 2px solid var(--light); }
+  .book-now h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+  .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 6px; }
+  .book-item { font-size: 13px; }
+
+  /* CONTENT */
+  .content { padding: 0 48px; }
+
+  /* PHASE */
+  .phase { display: flex; align-items: flex-end; justify-content: space-between; padding: 28px 0 10px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
+  .phase-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+  .phase-meta { font-size: 12px; color: var(--muted); }
+
+  /* DAY */
+  .day { display: grid; grid-template-columns: 80px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .day-num { text-align: center; padding-top: 3px; }
+  .day-n { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--red); line-height: 1; }
+  .day-dow { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .day-city { font-size: 10px; color: var(--blue); font-weight: 600; margin-top: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .day-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+  .segs { display: flex; flex-direction: column; gap: 7px; }
+  .seg { display: flex; gap: 10px; align-items: flex-start; }
+  .seg-ic { font-size: 15px; flex-shrink: 0; width: 22px; text-align: center; margin-top: 1px; }
+  .seg-tx { font-size: 13.5px; line-height: 1.55; }
+  .seg-tx strong { font-weight: 600; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.3px; text-transform: uppercase; }
+  .t-hp     { background: rgba(60,52,137,0.1); color: #3C3489; }
+  .t-food   { background: rgba(163,45,45,0.1); color: var(--red); }
+  .t-run    { background: rgba(42,94,42,0.1);  color: var(--green); }
+  .t-friends{ background: rgba(138,106,0,0.12); color: var(--gold); }
+  .t-travel { background: rgba(26,26,24,0.07); color: var(--ink); }
+  .t-art    { background: rgba(24,95,165,0.1);  color: var(--blue); }
+  .t-sausage{ background: rgba(163,45,45,0.1); color: var(--red); }
+  .t-sticky { background: rgba(138,106,0,0.12); color: var(--gold); }
+
+  /* NOTES */
+  .note { margin-top: 10px; padding: 9px 12px; background: rgba(163,45,45,0.06); border-left: 3px solid var(--red); border-radius: 0 4px 4px 0; font-size: 12.5px; color: #791F1F; font-style: italic; }
+  .tip  { margin-top: 10px; padding: 9px 12px; background: rgba(24,95,165,0.07); border-left: 3px solid var(--blue); border-radius: 0 4px 4px 0; font-size: 12.5px; color: #0C447C; }
+  .baby { margin-top: 10px; padding: 9px 12px; background: rgba(153,53,86,0.07); border-left: 3px solid #993556; border-radius: 0 4px 4px 0; font-size: 12.5px; color: #72243E; }
+
+  /* FOOTER */
+  .footer { margin: 40px 48px 0; padding: 20px 0 0; border-top: 1px solid var(--light); font-size: 12px; color: var(--muted); }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .footer-links a { color: var(--muted); font-size: 12px; }
+
+  .japan-link { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: #f4f1eb !important; border: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; margin-top: 4px; }
+  .japan-link:hover { background: #333; }
+
+  @media (max-width:600px) {
+    .header, .overview, .book-now, .content, .footer { padding-left: 20px; padding-right: 20px; }
+    .header::before { display: none; }
+    .day { grid-template-columns: 60px 1fr; gap: 12px; }
+    .site-nav { padding: 10px 20px; }
+    .trip-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <span class="nav-title">Summer 2026 Trip</span>
+  <div class="nav-links">
+    <a href="japan.html">🇯🇵 Japan</a>
+    <a href="london.html" style="color:#f4f1eb;">🇬🇧 London</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="trip-title">London</div>
+  <div class="trip-subtitle">14 July – 24 July 2026 &nbsp;·&nbsp; 10 Nights</div>
+  <div class="header-tags">
+    <span class="htag">⚡ Harry Potter</span>
+    <span class="htag">🍛 Indian food</span>
+    <span class="htag">🥐 Sausage rolls</span>
+    <span class="htag">🍮 Sticky toffee</span>
+    <span class="htag">🏃 Running</span>
+    <span class="htag">🎨 Galleries</span>
+    <span class="htag">👫 Friends</span>
+  </div>
+</div>
+
+<div class="overview">
+  <h2>Overview</h2>
+  <div class="ov-grid">
+    <div><div class="ov-label">Arrive</div><div class="ov-value">Tue 14 Jul · LHR · 6:25am</div></div>
+    <div><div class="ov-label">Depart</div><div class="ov-value">Fri 24 Jul · LHR → PIT</div></div>
+    <div><div class="ov-label">Friends (evenings)</div><div class="ov-value">Alan & YY · Pitfield St</div></div>
+    <div><div class="ov-label">Friends (weekends)</div><div class="ov-value">Coleen & Harry · Hounslow</div></div>
+    <div><div class="ov-label">Cousin</div><div class="ov-value">South Kensington</div></div>
+  </div>
+</div>
+
+<div class="book-now">
+  <h3>📌 Book immediately</h3>
+  <div class="book-grid">
+    <div class="book-item">⚡ <a href="https://www.wbstudiotour.co.uk/">WB Studio Tour</a> — sells out months ahead</div>
+    <div class="book-item">🗺️ <a href="http://www.tourformuggles.com/">Tour for Muggles</a> — closed Mondays</div>
+    <div class="book-item">🍛 <a href="http://www.tayyabs.co.uk/">Tayyabs</a> — always full, book ahead</div>
+    <div class="book-item">🚆 <a href="https://www.thetrainline.com/">Trainline</a> — Euston→Watford & Paddington→Oxford</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <div><div class="phase-title">Arrive & settle</div><div class="phase-meta">July 14–15</div></div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">14</div><div class="day-dow">Tuesday</div><div class="day-city">→ London</div></div>
+    <div>
+      <div class="day-title">Arrive LHR · Platform 9¾ · Recover</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">✈️</div><div class="seg-tx"><strong>Arrive LHR 6:25am</strong> — Piccadilly line into London (~50 min, direct). King's Cross/St Pancras is on this line.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.harrypotterplatform934.com/">Platform 9¾, King's Cross</a></strong> — stop en route from the airport. Opens 8am Mon–Sat. Beat the queues, get the photo, browse the HP shop — no extra journey needed.</div></div>
+        <div class="seg"><div class="seg-ic">🥐</div><div class="seg-tx"><strong>First Greggs sausage roll</strong> — there will be one near King's Cross. Non-negotiable.</div></div>
+        <div class="seg"><div class="seg-ic">🏨</div><div class="seg-tx">Check in, rest. Easy dinner, early night — mandatory after an overnight flight from Tokyo.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-hp">Platform 9¾</span><span class="tag t-sausage">First Greggs</span><span class="tag t-travel">Arrival</span></div>
+      <div class="tip">King's Cross/St Pancras is directly on the Piccadilly line from Heathrow — Platform 9¾ is a natural no-effort first stop on the way in.</div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <div><div class="phase-title">Harry Potter week</div><div class="phase-meta">July 15–18</div></div>
+    <span style="font-size:22px;color:rgba(0,0,0,0.1);">⚡</span>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">15</div><div class="day-dow">Wednesday</div><div class="day-city">Watford</div></div>
+    <div>
+      <div class="day-title">Warner Bros. Studio Tour — full day</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — Hyde Park or local park, early start today</div></div>
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx"><strong>Euston → Watford Junction</strong> (~20 min) then shuttle bus to the studios. First entry slot = far less crowded.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.wbstudiotour.co.uk/">Warner Bros. Studio Tour</a></strong> — the Great Hall, Diagon Alley, Forbidden Forest, Dumbledore's office, the Hogwarts castle model. Budget 4–5 hours. Butterbeer is mandatory. Rated 4.8 ⭐ with 100k+ reviews.</div></div>
+        <div class="seg"><div class="seg-ic">🍛</div><div class="seg-tx"><strong><a href="https://www.dishoom.com/">Dishoom King's Cross</a></strong> on the way back — 5 min from the station. Black dal and butter chicken. Queue or book ahead.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-hp">WB Studios</span><span class="tag t-run">Run</span><span class="tag t-food">Dishoom</span></div>
+      <div class="note">⚠️ Book NOW at wbstudiotour.co.uk — July sells out months in advance.</div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">16</div><div class="day-dow">Thursday</div><div class="day-city">City / Bankside</div></div>
+    <div>
+      <div class="day-title">HP film locations · Tate Modern · Sticky toffee</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Victoria+Embankment+London+running">Victoria Embankment</a>, flat Thames path, stunning views</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="http://www.tourformuggles.com/">Tour for Muggles</a></strong> — starts at Leadenhall Market. Rated 4.9 ⭐. Guide "Harry Trotter" is legendary. 2.5 hours. Book ahead.</div></div>
+        <div class="seg"><div class="seg-ic">🏛️</div><div class="seg-tx"><strong><a href="https://leadenhallmarket.co.uk/">Leadenhall Market</a></strong> — Diagon Alley / Leaky Cauldron exterior. Stunning Victorian painted ironwork.</div></div>
+        <div class="seg"><div class="seg-ic">🌉</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=Millennium+Bridge+London">Millennium Bridge</a></strong> — destroyed by Death Eaters in Half-Blood Prince. Walk across toward the South Bank.</div></div>
+        <div class="seg"><div class="seg-ic">🎨</div><div class="seg-tx"><strong><a href="https://www.tate.org.uk/visit/tate-modern">Tate Modern</a></strong> — right at the foot of the bridge. Free entry to the permanent collection. The Turbine Hall alone is worth the stop. 1–2 hours.</div></div>
+        <div class="seg"><div class="seg-ic">🍮</div><div class="seg-tx"><strong><a href="https://www.greeneking.co.uk/pubs/greater-london/anchor-bankside">The Anchor Bankside</a></strong> — 2-min walk from Tate Modern. Historic Thames pub, sticky toffee pudding confirmed on the menu.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-hp">Film locations</span><span class="tag t-art">Tate Modern</span><span class="tag t-run">Run</span><span class="tag t-sticky">Sticky toffee</span></div>
+      <div class="tip">Perfect sequence: Tour for Muggles → Leadenhall → Millennium Bridge → Tate Modern → The Anchor. All within a 10-min walk of each other.</div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">17</div><div class="day-dow">Friday</div><div class="day-city">WC2 / Islington</div></div>
+    <div>
+      <div class="day-title">National Gallery · Grimmauld Place · Goodwin's Court · Alan & YY</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Regent's+Canal+towpath+London">Regent's Canal towpath</a>, flat and scenic through Camden and beyond</div></div>
+        <div class="seg"><div class="seg-ic">🎨</div><div class="seg-tx"><strong><a href="https://www.nationalgallery.org.uk/">National Gallery</a></strong>, Trafalgar Square — free entry. Van Gogh's Sunflowers, Monet, Caravaggio. Allow 1.5–2 hours.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=Claremont+Square+Islington+London">Claremont Square, Islington</a></strong> — filming location for 12 Grimmauld Place (Order of the Phoenix). Easy walk from Angel tube.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=Goodwin's+Court+Covent+Garden+London">Goodwin's Court, Covent Garden</a></strong> — tiny 17th-century gas-lit alley believed to have inspired Diagon Alley. Off St Martin's Lane — easy to miss.</div></div>
+        <div class="seg"><div class="seg-ic">👶</div><div class="seg-tx"><strong>Evening: Alan & YY</strong> — Pitfield St, Shoreditch (Old Street tube). They have a newborn so keep it relaxed — early dinner rather than a late night out.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-art">National Gallery</span><span class="tag t-hp">Grimmauld Place</span><span class="tag t-run">Run</span><span class="tag t-friends">Alan & YY</span></div>
+      <div class="baby">🎁 Bring the Kokeshi doll and Omamori charm from Tohoku as a gift for the baby — a personal touch that connects to your trip.</div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">18</div><div class="day-dow">Saturday</div><div class="day-city">Regent's Park</div></div>
+    <div>
+      <div class="day-title">Regent's Park · London Zoo · Coleen & Harry</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Regent's+Park+running+track+London">Regent's Park running track</a>, free 385m cinder track. Rated 4.5 ⭐.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.zsl.org/zsl-london-zoo">London Zoo Reptile House</a></strong> — where Harry speaks Parseltongue and releases the boa constrictor. Right next to the running track.</div></div>
+        <div class="seg"><div class="seg-ic">🌿</div><div class="seg-tx"><strong>Primrose Hill</strong> — 5-min walk from the park, lovely views over the London skyline</div></div>
+        <div class="seg"><div class="seg-ic">👫</div><div class="seg-tx"><strong>Coleen & Harry</strong> — Hounslow TW3 (Piccadilly line). Saturday they're free all day. Consider meeting at Richmond (District line) — lovely riverside pubs halfway between.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-run">Run</span><span class="tag t-hp">Reptile House</span><span class="tag t-friends">Coleen & Harry</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <div><div class="phase-title">Indian food & South London</div><div class="phase-meta">July 19–21</div></div>
+    <span style="font-size:22px;color:rgba(0,0,0,0.1);">🍛</span>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">19</div><div class="day-dow">Sunday</div><div class="day-city">Southall</div></div>
+    <div>
+      <div class="day-title">Southall Broadway — Indian food day</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx"><strong>Elizabeth line to Southall</strong> from Paddington (~20 min). Make a full afternoon of it.</div></div>
+        <div class="seg"><div class="seg-ic">🍛</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=Haweli+Restaurant+Southall">Haweli Restaurant</a>, Southall Broadway</strong> — rated 4.8 ⭐ with 10k+ reviews. Lamb karahi, chapli kebab, garlic naan. Explore the sweet shops and chaat stalls on the Broadway too.</div></div>
+        <div class="seg"><div class="seg-ic">👫</div><div class="seg-tx">If Coleen & Harry couldn't make Saturday — Hounslow is one Piccadilly line stop from Southall. Combine the Indian food afternoon with seeing them in the evening.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-food">Southall Indian</span><span class="tag t-friends">Coleen & Harry (alt)</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">20</div><div class="day-dow">Monday</div><div class="day-city">Oxford</div></div>
+    <div>
+      <div class="day-title">Oxford day trip — the real Hogwarts</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx"><strong>Paddington → Oxford</strong> (~55 min, GWR). Early train — Oxford is best before the tour groups arrive.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.chch.ox.ac.uk/">Christ Church College</a></strong> — the Great Hall directly inspired Hogwarts'. The staircase was used for filming in the early films.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://visit.bodleian.ox.ac.uk/">Bodleian Library / Divinity School</a></strong> — used as the Hogwarts hospital wing (Philosopher's Stone) and the library. Tours available.</div></div>
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: run in <a href="https://www.google.com/maps/search/?api=1&query=University+Parks+Oxford">University Parks</a></strong> — beautiful Victorian park in the heart of Oxford</div></div>
+        <div class="seg"><div class="seg-ic">🥐</div><div class="seg-tx">Explore the <a href="https://www.google.com/maps/search/?api=1&query=Oxford+Covered+Market">Oxford Covered Market</a> for lunch and a sausage roll</div></div>
+      </div>
+      <div class="tags"><span class="tag t-hp">Christ Church</span><span class="tag t-hp">Bodleian</span><span class="tag t-run">Run</span><span class="tag t-travel">Day trip</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">21</div><div class="day-dow">Tuesday</div><div class="day-city">South Bank / E1</div></div>
+    <div>
+      <div class="day-title">Borough Market · Shakespeare's Globe · Tayyabs</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Victoria+Embankment+London">South Bank / Victoria Embankment</a>, flat Thames path</div></div>
+        <div class="seg"><div class="seg-ic">🛒</div><div class="seg-tx"><strong><a href="https://boroughmarket.org.uk/">Borough Market</a></strong> — London's best food market, open Tuesday–Saturday. Neal's Yard cheese stall is essential.</div></div>
+        <div class="seg"><div class="seg-ic">🎭</div><div class="seg-tx"><strong>Shakespeare's Globe</strong> — walk past or catch a matinee. Right on the Thames adjacent to the Millennium Bridge.</div></div>
+        <div class="seg"><div class="seg-ic">🍛</div><div class="seg-tx"><strong><a href="http://www.tayyabs.co.uk/">Tayyabs, Whitechapel</a></strong> — legendary Lahori grill. Tandoor lamb chops sizzle at the table. BYO beer. Book ahead or arrive right at opening.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-food">Borough Market</span><span class="tag t-food">Tayyabs</span><span class="tag t-run">Run</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <div><div class="phase-title">Final stretch</div><div class="phase-meta">July 22–24</div></div>
+    <span style="font-size:22px;color:rgba(0,0,0,0.1);">🏁</span>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">22</div><div class="day-dow">Wednesday</div><div class="day-city">South Kensington</div></div>
+    <div>
+      <div class="day-title">South Kensington · Cousin · Hyde Park · St John</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Hyde+Park+London+running">Hyde Park / Kensington Gardens</a>, huge and beautiful, right next to South Kensington</div></div>
+        <div class="seg"><div class="seg-ic">👤</div><div class="seg-tx"><strong>Cousin, South Kensington</strong> — lunch or dinner in the neighbourhood. Brompton Road, Thurloe Street, and Old Brompton Road have excellent restaurants. Let them pick their local favourite.</div></div>
+        <div class="seg"><div class="seg-ic">🌳</div><div class="seg-tx"><strong>Kensington Gardens</strong> — walk off lunch through the park. The Serpentine Gallery (free, contemporary art) is worth a look if you wander that way.</div></div>
+        <div class="seg"><div class="seg-ic">🥐</div><div class="seg-tx"><strong><a href="https://stjohnrestaurant.com/a/restaurants/bread-and-wine">St John Bread and Wine</a></strong>, Spitalfields — the artisan sausage roll. Warm, flaky, deeply savoury. Open from noon.</div></div>
+        <div class="seg"><div class="seg-ic">🍮</div><div class="seg-tx"><strong>Sticky toffee pudding</strong> — any good gastropub around Kensington or Spitalfields. Ask your server.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-friends">Cousin</span><span class="tag t-run">Hyde Park</span><span class="tag t-sausage">St John</span><span class="tag t-sticky">Sticky toffee</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">23</div><div class="day-dow">Thursday</div><div class="day-city">London</div></div>
+    <div>
+      <div class="day-title">Final day — farewell sausage roll & pack</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: final run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Hyde+Park+London+running">Hyde Park</a> or <a href="https://www.google.com/maps/search/?api=1&query=Kensington+Gardens+London">Kensington Gardens</a>, a proper London send-off</div></div>
+        <div class="seg"><div class="seg-ic">🥐</div><div class="seg-tx"><strong>Greggs breakfast sausage roll</strong> — you started with one on arrival. End the same way. The circle is complete.</div></div>
+        <div class="seg"><div class="seg-ic">🛍️</div><div class="seg-tx">Last souvenirs — <a href="https://www.google.com/maps/search/?api=1&query=Covent+Garden+London">Covent Garden</a> or <a href="https://www.google.com/maps/search/?api=1&query=Seven+Dials+London">Seven Dials</a> for independent shops</div></div>
+        <div class="seg"><div class="seg-ic">🍮</div><div class="seg-tx"><strong>Final sticky toffee pudding</strong> — proper dinner out, order it as dessert. Non-negotiable.</div></div>
+        <div class="seg"><div class="seg-ic">🧳</div><div class="seg-tx">Pack, confirm flight, sensible bedtime</div></div>
+      </div>
+      <div class="tags"><span class="tag t-sausage">Final Greggs</span><span class="tag t-sticky">Sticky toffee</span><span class="tag t-run">Final run</span></div>
+    </div>
+  </div>
+
+  <div class="day">
+    <div class="day-num"><div class="day-n">24</div><div class="day-dow">Friday</div><div class="day-city">→ Pittsburgh</div></div>
+    <div>
+      <div class="day-title">Depart LHR → Pittsburgh</div>
+      <div class="segs">
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx"><strong>Piccadilly line to Heathrow</strong> — allow at least 3 hours before departure for international check-in</div></div>
+        <div class="seg"><div class="seg-ic">✈️</div><div class="seg-tx">LHR → Pittsburgh. The trip of a lifetime, done.</div></div>
+      </div>
+      <div class="tags"><span class="tag t-travel">Depart</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>London itinerary planned May 2026 &nbsp;·&nbsp; Arrive LHR Tue 14 Jul 6:25am · Depart LHR Fri 24 Jul → Pittsburgh</p>
+  <div class="footer-links">
+    <a href="https://www.wbstudiotour.co.uk/">WB Studio Tour</a>
+    <a href="http://www.tourformuggles.com/">Tour for Muggles</a>
+    <a href="https://www.tate.org.uk/visit/tate-modern">Tate Modern</a>
+    <a href="https://www.nationalgallery.org.uk/">National Gallery</a>
+    <a href="http://www.tayyabs.co.uk/">Tayyabs</a>
+    <a href="https://stjohnrestaurant.com/a/restaurants/bread-and-wine">St John Bread & Wine</a>
+    <a href="https://www.dishoom.com/">Dishoom</a>
+  </div>
+  <div style="margin-top:16px;"><a href="japan.html" class="japan-link">← View Japan itinerary 🇯🇵</a></div>
+</div>
+
+</body>
+</html>
