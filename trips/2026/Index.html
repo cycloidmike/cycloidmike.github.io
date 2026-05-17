@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer 2026 Trip</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f1eb; color: #1a1a18; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+  a { text-decoration: none; }
+
+  nav { background: #1a1a18; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-title { color: #f4f1eb; font-size: 14px; font-weight: 500; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: rgba(244,241,235,0.7); font-size: 13px; font-weight: 500; }
+  .nav-links a:hover { color: #f4f1eb; }
+
+  .hero { background: #1a1a18; color: #f4f1eb; padding: 80px 48px 72px; text-align: center; }
+  .hero-eyebrow { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(244,241,235,0.5); margin-bottom: 16px; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 12px; }
+  .hero-sub { font-size: 16px; color: rgba(244,241,235,0.6); font-weight: 300; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 2px; flex: 1; }
+  .card { background: #f4f1eb; padding: 60px 48px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: background 0.2s; }
+  .card:hover { background: #ece8e0; }
+  .card-flag { font-size: 80px; position: absolute; right: 24px; top: 16px; opacity: 0.12; line-height: 1; }
+  .card-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #7a7570; margin-bottom: 10px; font-weight: 500; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900; letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+  .card-dates { font-size: 14px; color: #7a7570; margin-bottom: 20px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+  .card-tag { font-size: 12px; background: rgba(0,0,0,0.06); color: #444; padding: 3px 10px; border-radius: 20px; }
+  .card-link { display: inline-flex; align-items: center; gap: 6px; background: #1a1a18; color: #f4f1eb; padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; margin-top: auto; align-self: flex-start; transition: background 0.15s; }
+  .card-link:hover { background: #333; }
+
+  .flights { background: #e8e3d8; padding: 28px 48px; display: flex; gap: 40px; flex-wrap: wrap; align-items: center; }
+  .flight-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a7570; font-weight: 600; margin-bottom: 3px; }
+  .flight-value { font-size: 14px; font-weight: 500; }
+  .flight-arrow { font-size: 22px; color: rgba(0,0,0,0.15); }
+
+  footer { background: #1a1a18; color: rgba(244,241,235,0.4); padding: 20px 48px; font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+    .hero { padding: 48px 24px; }
+    .hero-title { font-size: 36px; }
+    nav, .flights, footer { padding-left: 24px; padding-right: 24px; }
+    .card { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">Summer 2026 Trip</span>
+  <div class="nav-links">
+    <a href="Japan.html">🇯🇵 Japan</a>
+    <a href="London.html">🇬🇧 London</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">July 2026</div>
+  <div class="hero-title">Japan & London</div>
+  <div class="hero-sub">Three weeks · Two countries · One trip of a lifetime</div>
+</div>
+
+<div class="flights">
+  <div>
+    <div class="flight-label">Depart</div>
+    <div class="flight-value">Thu 2 Jul → Tokyo HND 3:50pm</div>
+  </div>
+  <div class="flight-arrow">→</div>
+  <div>
+    <div class="flight-label">Tokyo → London</div>
+    <div class="flight-value">Mon 14 Jul HND 12:15am → LHR 6:25am</div>
+  </div>
+  <div class="flight-arrow">→</div>
+  <div>
+    <div class="flight-label">Return to Home</div>
+    <div class="flight-value">Fri 24 Jul from LHR</div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="card-flag">🇯🇵</div>
+    <div class="card-label">Part one · 12 nights</div>
+    <div class="card-title">Japan</div>
+    <div class="card-dates">Thu 2 July – Mon 14 July</div>
+    <div class="card-tags">
+      <span class="card-tag">🍜 Ramen</span>
+      <span class="card-tag">♨️ Onsen</span>
+      <span class="card-tag">🥾 Hiking</span>
+      <span class="card-tag">🐱 Cat cafes</span>
+      <span class="card-tag">☕ Coffee</span>
+      <span class="card-tag">🍣 Kaiten-zushi</span>
+      <span class="card-tag">🏃 Running</span>
+    </div>
+    <div style="font-size:13.5px;color:#444;line-height:1.6;margin-bottom:28px;">Tokyo · Osaka · Sendai · Matsushima · Zao Onsen · Ginzan Onsen. With sister's family Jul 2–7, then solo north into Tohoku for onsens, hiking, and the best ramen in Japan.</div>
+    <a href="japan.html" class="card-link">View Japan itinerary →</a>
+  </div>
+
+  <div class="card">
+    <div class="card-flag">🇬🇧</div>
+    <div class="card-label">Part two · 10 nights</div>
+    <div class="card-title">London</div>
+    <div class="card-dates">Tue 14 July – Fri 24 July</div>
+    <div class="card-tags">
+      <span class="card-tag">⚡ Harry Potter</span>
+      <span class="card-tag">🍛 Indian food</span>
+      <span class="card-tag">🥐 Sausage rolls</span>
+      <span class="card-tag">🍮 Sticky toffee</span>
+      <span class="card-tag">🎨 Galleries</span>
+      <span class="card-tag">👫 Friends</span>
+    </div>
+    <div style="font-size:13.5px;color:#444;line-height:1.6;margin-bottom:28px;">WB Studio Tour · film locations · Tate Modern · National Gallery · Southall · Oxford day trip. Plus Alan & YY, Coleen & Harry, and the South Kensington cousin.</div>
+    <a href="london.html" class="card-link">View London itinerary →</a>
+  </div>
+</div>
+
+<footer>
+  <p>Summer 2026 &nbsp;·&nbsp; Tokyo → London</p>
+</footer>
+
+</body>
+</html>
