@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Itinerary — July 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --rust: #a0522d;
+    --muted: #7a6f65;
+    --light: #e8e0d0;
+    --accent: #2c5f8a;
+    --green: #3a6b4a;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(44,95,138,0.3); transition: border-color 0.2s; }
+  a:hover { border-color: var(--accent); }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '日本';
+    position: absolute;
+    right: 30px;
+    top: -5px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .trip-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .trip-subtitle {
+    font-size: 13px;
+    color: rgba(245,240,232,0.55);
+    margin-top: 6px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .header-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .htag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(245,240,232,0.85);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* OVERVIEW */
+  .overview {
+    background: var(--light);
+    padding: 24px 48px;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .ov-block { }
+  .ov-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .ov-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .overview h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  /* QUICK LINKS */
+  .quick-links {
+    padding: 20px 48px;
+    background: white;
+    border-bottom: 1px solid var(--light);
+  }
+  .quick-links h3 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px;
+  }
+  .link-item {
+    font-size: 12.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .link-item span { font-size: 13px; }
+
+  /* MAIN CONTENT */
+  .days-container {
+    padding: 0 48px 20px;
+  }
+
+  /* PHASE */
+  .phase-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 32px 0 12px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 4px;
+  }
+  .phase-label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  .phase-meta {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .phase-kanji {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 26px;
+    color: rgba(0,0,0,0.1);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .day-num { text-align: center; padding-top: 3px; }
+  .day-label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--red);
+  }
+  .day-date {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .day-loc {
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .day-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .segments { display: flex; flex-direction: column; gap: 7px; }
+  .segment { display: flex; gap: 10px; align-items: flex-start; }
+  .seg-icon { font-size: 14px; flex-shrink: 0; width: 20px; text-align: center; margin-top: 1px; }
+  .seg-text { font-size: 13.5px; color: #2a2420; line-height: 1.55; }
+  .seg-text strong { font-weight: 600; }
+  .seg-text em { color: var(--muted); font-style: normal; font-size: 12.5px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .tag {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 3px;
+    letter-spacing: 0.3px; text-transform: uppercase;
+  }
+  .tag-ramen  { background: rgba(160,82,45,0.12); color: var(--rust); }
+  .tag-onsen  { background: rgba(44,95,138,0.12); color: var(--accent); }
+  .tag-hike   { background: rgba(58,107,74,0.12); color: var(--green); }
+  .tag-run    { background: rgba(58,107,74,0.12); color: var(--green); }
+  .tag-sushi  { background: rgba(192,57,43,0.12); color: var(--red); }
+  .tag-cat    { background: rgba(122,111,101,0.12); color: var(--muted); }
+  .tag-coffee { background: rgba(122,111,101,0.12); color: var(--muted); }
+  .tag-art    { background: rgba(44,95,138,0.12); color: var(--accent); }
+  .tag-travel { background: rgba(26,20,16,0.07); color: var(--ink); }
+  .tag-sister { background: rgba(180,130,80,0.15); color: #8b6020; }
+
+  .note-box {
+    margin-top: 10px;
+    padding: 9px 12px;
+    background: rgba(192,57,43,0.06);
+    border-left: 3px solid var(--red);
+    border-radius: 0 4px 4px 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin: 40px 48px 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--light);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer a { color: var(--muted); }
+
+  @media (max-width: 600px) {
+    .header, .overview, .quick-links, .days-container, .footer { padding-left: 20px; padding-right: 20px; }
+    .header::before { display: none; }
+    .day-card { grid-template-columns: 60px 1fr; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="trip-title">Japan — Tohoku &amp; Beyond</div>
+  <div class="trip-subtitle">July 2 – 13, 2026 &nbsp;·&nbsp; 12 Nights &nbsp;·&nbsp; Tokyo · Osaka · Sendai · Zao · Ginzan</div>
+  <div class="header-tags">
+    <span class="htag">🍜 Ramen</span>
+    <span class="htag">♨️ Onsen</span>
+    <span class="htag">🥾 Hiking</span>
+    <span class="htag">🐱 Cat Cafes</span>
+    <span class="htag">☕ Specialty Coffee</span>
+    <span class="htag">🍣 Kaiten-Zushi</span>
+    <span class="htag">🏃 Running</span>
+  </div>
+</div>
+
+<div class="overview">
+  <h2>Trip Overview</h2>
+  <div class="overview-grid">
+    <div class="ov-block"><div class="ov-label">Arrive</div><div class="ov-value">Jul 2 · HND · 3:50pm</div></div>
+    <div class="ov-block"><div class="ov-label">Depart Japan</div><div class="ov-value">Jul 14 · HND · 12:15am</div></div>
+    <div class="ov-block"><div class="ov-label">Arrive London</div><div class="ov-value">Jul 14 · LHR · 6:25am</div></div>
+    <div class="ov-block"><div class="ov-label">With Sister</div><div class="ov-value">Jul 2–7 (Tokyo + Osaka)</div></div>
+    <div class="ov-block"><div class="ov-label">Tohoku</div><div class="ov-value">Jul 7–13</div></div>
+    <div class="ov-block"><div class="ov-label">Next stop</div><div class="ov-value">London → Pittsburgh Jul 24</div></div>
+  </div>
+</div>
+
+<div class="quick-links">
+  <h3>📌 Book These in Advance</h3>
+  <div class="links-grid">
+    <div class="link-item"><span>🎨</span><a href="https://www.teamlab.art/jp/e/tokyo/" target="_blank">teamLab Borderless Tickets</a></div>
+    <div class="link-item"><span>🏯</span><a href="https://www.notoyaryokan.com/" target="_blank">Notoya Ryokan, Ginzan</a></div>
+    <div class="link-item"><span>🏯</span><a href="https://www.fujiya-ginzan.com/" target="_blank">Fujiya Ryokan, Ginzan</a></div>
+    <div class="link-item"><span>🚅</span><a href="https://www.jrpass.com/" target="_blank">JR Pass (consider buying)</a></div>
+    <div class="link-item"><span>🗺️</span><a href="https://www.hyperdia.com/" target="_blank">Hyperdia — Train Routes</a></div>
+    <div class="link-item"><span>🍜</span><a href="https://www.fu-unji.com/" target="_blank">Fuunji Ramen, Shinjuku</a></div>
+    <div class="link-item"><span>🎨</span><a href="https://www.teamlab.art/jp/e/tokyo/" target="_blank">teamLab (closed Tuesdays!)</a></div>
+    <div class="link-item"><span>🐱</span><a href="https://catmocha.jp/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a></div>
+    <div class="link-item"><span>☕</span><a href="https://arabica.com/location/arabica-tokyo-azabudai-hills-b1/" target="_blank">% Arabica Azabudai Hills</a></div>
+    <div class="link-item"><span>🍣</span><a href="https://ichiran.com/shop/tohoku/sendai/" target="_blank">Ichiran Sendai (24hr)</a></div>
+    <div class="link-item"><span>🚡</span><a href="https://www.zao-ropeway.co.jp/en/" target="_blank">Zao Ropeway Info</a></div>
+    <div class="link-item"><span>🌊</span><a href="https://www.matsushima-kanko.com/en/" target="_blank">Matsushima Tourism</a></div>
+  </div>
+</div>
+
+<div class="days-container">
+
+  <!-- PHASE 1: TOKYO -->
+  <div class="phase-header">
+    <div>
+      <div class="phase-label">Phase 1 — Tokyo</div>
+      <div class="phase-meta">July 2–5 · With sister's family</div>
+    </div>
+    <div class="phase-kanji">東京</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">2</div>
+      <div class="day-date">Wed · Jul</div>
+      <div class="day-loc">Tokyo</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Arrive &amp; Recover</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">✈️</div><div class="seg-text"><strong>Arrive HND 3:50pm</strong> — take the <a href="https://www.google.com/maps/search/?api=1&query=Keikyu+Line+Haneda+Airport+Tokyo" target="_blank">Keikyu Line</a> into the city (~35 min to Shinagawa). IC card (Suica/Pasmo) from airport machines.</div></div>
+        <div class="segment"><div class="seg-icon">🏨</div><div class="seg-text">Check in, drop bags, freshen up</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Dinner with sister's family</strong> — ramen at <a href="https://ichiran.com/en/" target="_blank">Ichiran Shibuya</a>, solo booths, decompress from the flight</div></div>
+        <div class="segment"><div class="seg-icon">🌃</div><div class="seg-text">Early night — beat jet lag by staying up until 9–10pm local time</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-ramen">Ramen</span><span class="tag tag-sister">With Sister</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">3</div>
+      <div class="day-date">Thu · Jul</div>
+      <div class="day-loc">Tokyo</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Immersive Art &amp; World-Class Coffee</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Park+Tokyo" target="_blank">Yoyogi Park loop</a> (~5km), flat paths, beautiful tree canopy, very popular with local runners early morning</div></div>
+        <div class="segment"><div class="seg-icon">☕</div><div class="seg-text"><strong><a href="https://arabica.com/location/arabica-tokyo-azabudai-hills-b1/" target="_blank">% Arabica Azabudai Hills</a></strong> — futuristic all-white space, Kyoto latte is exceptional. Right next to teamLab. Opens 8am. <a href="https://www.google.com/maps/search/?api=1&query=Arabica+Coffee+Azabudai+Hills+Tokyo" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🎨</div><div class="seg-text"><strong><a href="https://www.teamlab.art/jp/e/tokyo/" target="_blank">teamLab Borderless</a></strong> (Azabudai Hills B1) — <strong style="color:#c0392b">closed Tuesdays, book in advance</strong>. 3–4 hours. Immersive digital art, the spiritual successor to Robot Restaurant's spectacle. Rated 4.6 ⭐. <a href="https://www.google.com/maps/search/?api=1&query=teamLab+Borderless+Azabudai+Hills+Tokyo" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi dinner</strong> — <a href="https://www.uobei.jp/" target="_blank">Uobei Shibuya</a> or Sushiro: good intro to conveyor belt before Tohoku's superior seafood</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-coffee">Coffee</span><span class="tag tag-art">Art</span><span class="tag tag-sushi">Kaiten-Zushi</span><span class="tag tag-sister">With Sister</span></div>
+      <div class="note-box">⚠️ teamLab is <strong>closed Tuesdays</strong>. Book tickets online at least 2–3 weeks in advance — they sell out, especially in July.</div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">4</div>
+      <div class="day-date">Fri · Jul</div>
+      <div class="day-loc">Tokyo</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Cat Cafes, Tsukemen &amp; Shinjuku</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Imperial+Palace+running+course+Tokyo" target="_blank">Imperial Palace outer loop</a> (~5km), Tokyo's most iconic flat running route, popular with locals every morning</div></div>
+        <div class="segment"><div class="seg-icon">🐱</div><div class="seg-text"><strong><a href="https://catmocha.jp/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a></strong> — open 10am, well-cared-for cats, lovely window views, Trish's kind of place. <a href="https://www.google.com/maps/search/?api=1&query=Cat+Cafe+MOCHA+Ikebukuro+Tokyo" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong><a href="https://www.fu-unji.com/" target="_blank">Fuunji Shinjuku</a></strong> for lunch — legendary tsukemen (thick dipping ramen). Arrive 10:40am, opens 11am. Worth the queue. <a href="https://www.google.com/maps/search/?api=1&query=Fuunji+ramen+Shinjuku+Tokyo" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🌆</div><div class="seg-text">Evening at <a href="https://www.google.com/maps/search/?api=1&query=Omoide+Yokocho+Shinjuku+Tokyo" target="_blank">Omoide Yokocho</a> (Memory Lane, Shinjuku) for yakitori, then <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Crossing+Tokyo" target="_blank">Shibuya Crossing</a> at dusk with the family</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-cat">Cat Cafe</span><span class="tag tag-ramen">Tsukemen</span><span class="tag tag-sister">With Sister</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: OSAKA -->
+  <div class="phase-header">
+    <div>
+      <div class="phase-label">Phase 2 — Osaka</div>
+      <div class="phase-meta">July 5–7 · With sister's family</div>
+    </div>
+    <div class="phase-kanji">大阪</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">5</div>
+      <div class="day-date">Sat · Jul</div>
+      <div class="day-loc">→ Osaka</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Shinkansen South, Arrive Osaka</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🚅</div><div class="seg-text"><strong>Tokyo → Osaka Shinkansen</strong> — Hikari or Nozomi, ~2h 30m. Book reserved seats on <a href="https://www.jrpass.com/" target="_blank">JR Pass</a> or <a href="https://www.eki-net.com/en/" target="_blank">Eki-net</a>. Travel with sister's family.</div></div>
+        <div class="segment"><div class="seg-icon">🏨</div><div class="seg-text">Check in Namba/Shinsaibashi area, explore the neighbourhood</div></div>
+        <div class="segment"><div class="seg-icon">🌃</div><div class="seg-text"><strong><a href="https://www.google.com/maps/search/?api=1&query=Dotonbori+Osaka" target="_blank">Dotonbori at night</a></strong> — neon lights, takoyaki, Glico man sign. Family dinner on the strip.</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-travel">Shinkansen</span><span class="tag tag-sister">With Sister</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">6</div>
+      <div class="day-date">Sun · Jul</div>
+      <div class="day-loc">Osaka</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Kuromon Market &amp; Osaka Food Crawl</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Osaka+Castle+Park" target="_blank">Osaka Castle Park loop</a> (~4km), moats and stone walls, stunning early morning light</div></div>
+        <div class="segment"><div class="seg-icon">🦐</div><div class="seg-text"><strong><a href="https://kuromon.com/en/" target="_blank">Kuromon Market</a></strong> (9am, before crowds) — fresh wagyu skewers, oysters, uni on rice. Osaka's kitchen. <a href="https://www.google.com/maps/search/?api=1&query=Kuromon+Market+Osaka" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi lunch</strong> — <a href="https://www.uobei.jp/" target="_blank">Uobei Shinsaibashi</a>: tablet-ordering conveyor belt, great value and fresh Osaka-area fish</div></div>
+        <div class="segment"><div class="seg-icon">🌆</div><div class="seg-text">Afternoon at <a href="https://www.google.com/maps/search/?api=1&query=Shinsekai+Osaka" target="_blank">Shinsekai</a> &amp; <a href="https://www.google.com/maps/search/?api=1&query=Tsutenkaku+Tower+Osaka" target="_blank">Tsutenkaku Tower</a> — retro old-Osaka neighbourhood</div></div>
+        <div class="segment"><div class="seg-icon">🍢</div><div class="seg-text">Final family dinner — Kushikatsu (deep-fried skewers, Osaka's specialty). Rule: no double-dipping the sauce!</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-sushi">Kaiten-Zushi</span><span class="tag tag-ramen">Food Crawl</span><span class="tag tag-sister">With Sister</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">7</div>
+      <div class="day-date">Mon · Jul</div>
+      <div class="day-loc">→ Sendai</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Part Ways — Head North to Tohoku</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">👋</div><div class="seg-text"><strong>Morning farewell</strong> — sister's family heads to Nagano, you head north to Tohoku</div></div>
+        <div class="segment"><div class="seg-icon">🚅</div><div class="seg-text"><strong>Osaka → Tokyo → Sendai</strong> by Shinkansen (~4h total with transfer at Tokyo). Plan on <a href="https://www.hyperdia.com/" target="_blank">Hyperdia</a>.</div></div>
+        <div class="segment"><div class="seg-icon">🏨</div><div class="seg-text">Check in to Sendai hotel — <a href="https://www.google.com/maps/search/?api=1&query=Sendai+Station+Japan" target="_blank">central Sendai</a> is easy walking distance from the station</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Sendai miso ramen dinner</strong> — skip Ichiran, seek out a local shop for rich northern-style miso broth. Ask your hotel for recommendations.</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-travel">Travel Day</span><span class="tag tag-ramen">Ramen</span></div>
+      <div class="note-box">Tip: Book the Shinkansen as two segments (Osaka→Tokyo, Tokyo→Sendai) on <a href="https://www.eki-net.com/en/" target="_blank">Eki-net</a> or with your JR Pass.</div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: TOHOKU -->
+  <div class="phase-header">
+    <div>
+      <div class="phase-label">Phase 3 — Tohoku</div>
+      <div class="phase-meta">July 8–12 · Sendai · Zao Onsen · Ginzan Onsen</div>
+    </div>
+    <div class="phase-kanji">東北</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">8</div>
+      <div class="day-date">Tue · Jul</div>
+      <div class="day-loc">Sendai</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Sendai Base Day &amp; Matsushima</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Hirose+River+Sendai+Japan" target="_blank">Hirose River path</a>, flat, tree-lined, popular with locals. 5–10km along the riverbank through the city.</div></div>
+        <div class="segment"><div class="seg-icon">🌊</div><div class="seg-text"><strong><a href="https://www.matsushima-kanko.com/en/" target="_blank">Matsushima</a> day trip</strong> (~30 min by Senseki Line) — one of Japan's Three Views: pine-covered islands scattered across a bay. Walk coastal paths, visit <a href="https://www.google.com/maps/search/?api=1&query=Zuiganji+Temple+Matsushima+Japan" target="_blank">Zuiganji Temple</a>. <a href="https://www.google.com/maps/search/?api=1&query=Matsushima+Bay+Miyagi+Japan" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🦪</div><div class="seg-text"><strong>Grilled oysters at Matsushima</strong> — the bay is famous for them, eaten straight from the shell at waterfront stalls. Don't miss.</div></div>
+        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi dinner in Sendai</strong> — Sanriku coast fish makes this exceptional. Order from the tablet: salmon, scallop, uni if available. Ask your hotel for the best local spot.</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-sushi">Kaiten-Zushi</span><span class="tag tag-hike">Coastal Walk</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">9</div>
+      <div class="day-date">Wed · Jul</div>
+      <div class="day-loc">→ Zao</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Naruko Gorge → Zao Onsen</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏞️</div><div class="seg-text"><strong><a href="https://www.google.com/maps/search/?api=1&query=Naruko+Gorge+Miyagi+Japan" target="_blank">Naruko Gorge</a> stop</strong> — dramatic forested canyon en route to Yamagata. Easy walking trail, stunning summer green. About 1–2 hours.</div></div>
+        <div class="segment"><div class="seg-icon">🚌</div><div class="seg-text"><strong>Continue to <a href="https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Yamagata+Japan" target="_blank">Zao Onsen</a></strong> — mountain onsen village at ~880m elevation. Noticeably cooler than Tokyo (~22°C in July).</div></div>
+        <div class="segment"><div class="seg-icon">♨️</div><div class="seg-text"><strong>First onsen evening</strong> — soak in the Dai-rotenburo (large outdoor public bath), milky sulfuric water, mountain views. Go as the sun goes down for best atmosphere.</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text">Dinner at a ryokan or local izakaya — Yamagata beef and local mountain vegetables are the regional speciality</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-hike">Gorge Walk</span><span class="tag tag-onsen">Onsen</span></div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">10</div>
+      <div class="day-date">Thu · Jul</div>
+      <div class="day-loc">Zao</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Mt. Zao — Crater Lake Hike</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Early morning run</strong> — mountain roads below the village in cool air, no traffic, spectacular scenery before the ropeway opens</div></div>
+        <div class="segment"><div class="seg-icon">🚡</div><div class="seg-text"><strong><a href="https://www.zao-ropeway.co.jp/en/" target="_blank">Zao Ropeway</a></strong> to the upper station (~1,660m) — opens 8:30am, go early before afternoon clouds move in. <a href="https://www.google.com/maps/search/?api=1&query=Zao+Ropeway+Yamagata+Japan" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🥾</div><div class="seg-text"><strong>Hike to Okama Crater Lake</strong> — 3–4 hours round trip. The crater lake shifts between vivid emerald and cobalt blue. One of Tohoku's great sights. Moderate trail, bring good footwear and a light jacket.</div></div>
+        <div class="segment"><div class="seg-icon">♨️</div><div class="seg-text"><strong>Post-hike onsen</strong> — try a different public bath from yesterday. <a href="https://www.google.com/maps/search/?api=1&query=Kawarayuza+onsen+Zao+Yamagata" target="_blank">Kawarayuza</a> or Shimo-yu are both excellent.</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-hike">Crater Lake Hike</span><span class="tag tag-run">Morning Run</span><span class="tag tag-onsen">Onsen</span></div>
+      <div class="note-box">July is ideal — snow has fully cleared and the crater lake is completely visible. Bring a light jacket for the summit even in July (summit temps ~15°C).</div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">11</div>
+      <div class="day-date">Fri · Jul</div>
+      <div class="day-loc">→ Ginzan</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Ginzan Onsen — The Ghibli Village</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🚌</div><div class="seg-text"><strong>Transfer to <a href="https://www.google.com/maps/search/?api=1&query=Ginzan+Onsen+Yamagata+Japan" target="_blank">Ginzan Onsen</a></strong> — ~1.5 hours from Zao area via Oishida or Yamagata station. Buses are infrequent — plan timings carefully on <a href="https://www.hyperdia.com/" target="_blank">Hyperdia</a>.</div></div>
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Afternoon run</strong> — the Ginzan River valley road, flat and scenic, run out along the stream and back into the hills</div></div>
+        <div class="segment"><div class="seg-icon">🏮</div><div class="seg-text"><strong>Dusk at Ginzan</strong> — gas lamps light up as the sun sets. Three-storey Taisho-era wooden ryokan reflected in the river. This is the Spirited Away moment. Don't miss it.</div></div>
+        <div class="segment"><div class="seg-icon">♨️</div><div class="seg-text"><strong>Ryokan onsen &amp; kaiseki dinner</strong> — stay at <a href="https://www.notoyaryokan.com/" target="_blank">Notoya Ryokan</a> or <a href="https://www.fujiya-ginzan.com/" target="_blank">Fujiya</a>. Multi-course dinner included. Full traditional experience.</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-onsen">Onsen</span></div>
+      <div class="note-box">⚠️ <strong>Book Ginzan ryokan well in advance</strong> — only ~10 properties in the whole village. Summer fills up months ahead. Notoya and Fujiya are the most-recommended.</div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">12</div>
+      <div class="day-date">Sat · Jul</div>
+      <div class="day-loc">→ Tokyo</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Morning at Ginzan → Return to Tokyo</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🌅</div><div class="seg-text"><strong>Early morning walk</strong> — Ginzan before the day-trippers arrive. River mist, silent alleyways. Final onsen soak before checkout.</div></div>
+        <div class="segment"><div class="seg-icon">🚅</div><div class="seg-text"><strong>Return to Tokyo</strong> via <a href="https://www.hyperdia.com/" target="_blank">Yamagata Shinkansen</a> — ~2.5 hours. Arrive early-mid afternoon.</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Final Tokyo ramen</strong> — treat yourself: back to <a href="https://www.fu-unji.com/" target="_blank">Fuunji</a>, or try <a href="https://www.google.com/maps/search/?api=1&query=Nakiryu+ramen+Otsuka+Tokyo" target="_blank">Nakiryu</a> (Michelin-starred tantanmen in Otsuka, book ahead)</div></div>
+        <div class="segment"><div class="seg-icon">🛍️</div><div class="seg-text">Last souvenirs — <a href="https://www.google.com/maps/search/?api=1&query=Tokyu+Hands+Shinjuku+Tokyo" target="_blank">Tokyu Hands</a> or <a href="https://www.google.com/maps/search/?api=1&query=Isetan+food+hall+Shinjuku+Tokyo" target="_blank">Isetan food hall</a> in Shinjuku</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-travel">Travel Day</span><span class="tag tag-ramen">Final Ramen</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: DEPARTURE -->
+  <div class="phase-header">
+    <div>
+      <div class="phase-label">Phase 4 — Departure</div>
+      <div class="phase-meta">July 13–14 · Tokyo · HND → LHR</div>
+    </div>
+    <div class="phase-kanji">出発</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-num">
+      <div class="day-label">13</div>
+      <div class="day-date">Sun · Jul</div>
+      <div class="day-loc">Tokyo</div>
+    </div>
+    <div class="day-content">
+      <div class="day-title">Buffer Day &amp; Midnight Flight</div>
+      <div class="segments">
+        <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Final run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Shinjuku+Gyoen+Tokyo" target="_blank">Shinjuku Gyoen</a> or <a href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Park+Tokyo" target="_blank">Yoyogi Park</a>, a beautiful Tokyo send-off morning</div></div>
+        <div class="segment"><div class="seg-icon">☕</div><div class="seg-text"><strong>Final coffee</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Onibus+Coffee+Nakameguro+Tokyo" target="_blank">Onibus Coffee Nakameguro</a> or <a href="https://www.google.com/maps/search/?api=1&query=Bear+Pond+Espresso+Tokyo" target="_blank">Bear Pond Espresso</a>. Make it count.</div></div>
+        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Last kaiten-zushi lunch</strong> — one more conveyor belt round before London. Ask hotel for the nearest good one.</div></div>
+        <div class="segment"><div class="seg-icon">😴</div><div class="seg-text">Hotel rest / afternoon nap — flight boards around 11pm at Haneda</div></div>
+        <div class="segment"><div class="seg-icon">✈️</div><div class="seg-text"><strong>Depart HND 12:15am July 14</strong> → <a href="https://www.google.com/maps/search/?api=1&query=London+Heathrow+Airport" target="_blank">London Heathrow</a>, arrives 6:25am. Next stop: London!</div></div>
+      </div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-coffee">Coffee</span><span class="tag tag-sushi">Kaiten-Zushi</span></div>
+      <div class="note-box">Get to Haneda by 10pm — allow time for international check-in and security. Pack bags the night before to keep the day relaxed.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Itinerary created May 2026 &nbsp;·&nbsp; Flights: HND arrive Jul 2 3:50pm · HND depart Jul 14 12:15am · LHR arrive Jul 14 6:25am &nbsp;·&nbsp; Return PIT Jul 24</p>
+  <p style="margin-top:6px;">Train planning: <a href="https://www.hyperdia.com/" target="_blank">Hyperdia</a> &nbsp;·&nbsp; JR Pass: <a href="https://www.jrpass.com/" target="_blank">jrpass.com</a> &nbsp;·&nbsp; Maps: <a href="https://maps.google.com/" target="_blank">Google Maps</a></p>
+</div>
+
+</body>
+</html>
