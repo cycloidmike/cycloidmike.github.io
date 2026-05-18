@@ -40,12 +40,46 @@
 
   footer { background: #1a1a18; color: rgba(244,241,235,0.4); padding: 20px 48px; font-size: 12px; }
 
+  /* CALENDAR */
+  .cal-wrap { padding: 40px 48px; background: #f4f1eb; }
+  .cal-heading { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
+  .cal-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
+  .cal-sub { font-size: 13px; color: #7a7570; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { text-align: center; font-size: 11px; font-weight: 600; color: #7a7570; letter-spacing: 1px; text-transform: uppercase; padding: 0 0 8px; }
+  .cal-day { border-radius: 8px; padding: 10px 8px 9px; min-height: 76px; display: flex; flex-direction: column; position: relative; }
+  .cal-day.empty { background: transparent; min-height: 76px; }
+  .cal-day.pre, .cal-day.post { background: rgba(0,0,0,0.04); }
+  .cal-num { font-size: 13px; font-weight: 600; line-height: 1; margin-bottom: 5px; }
+  .cal-city { font-size: 10.5px; font-weight: 600; letter-spacing: 0.2px; line-height: 1.3; }
+  .cal-note { font-size: 9.5px; opacity: 0.8; margin-top: 3px; line-height: 1.3; }
+  .cal-day.trip { color: #fff; }
+  .cal-day.pre .cal-num, .cal-day.post .cal-num { color: #aaa; }
+
+  /* city colours */
+  .c-tokyo  { background: #C0392B; }
+  .c-osaka  { background: #CF6A10; }
+  .c-sendai { background: #1E8449; }
+  .c-zao    { background: #1A5276; }
+  .c-ginzan { background: #6C3483; }
+  .c-london { background: #2C3E50; }
+  .c-oxford { background: #117A65; }
+  .c-depart { background: #555; }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .leg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #444; }
+  .leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
   @media (max-width: 640px) {
     .cards { grid-template-columns: 1fr; }
     .hero { padding: 48px 24px; }
     .hero-title { font-size: 36px; }
-    nav, .flights, footer { padding-left: 24px; padding-right: 24px; }
+    nav, .flights, .cal-wrap, footer { padding-left: 20px; padding-right: 20px; }
     .card { padding: 40px 24px; }
+    .cal-day { min-height: 60px; padding: 7px 5px; }
+    .cal-city { font-size: 9px; }
+    .cal-note { display: none; }
   }
 </style>
 </head>
@@ -79,6 +113,172 @@
   <div>
     <div class="flight-label">Depart London</div>
     <div class="flight-value">Fri 24 Jul · LHR</div>
+  </div>
+</div>
+
+<div class="cal-wrap">
+  <div class="cal-heading">
+    <div class="cal-title">July 2026</div>
+    <div class="cal-sub">22 days · Tokyo → Osaka → Tohoku → London</div>
+  </div>
+
+  <div class="cal-grid">
+    <!-- Day of week headers -->
+    <div class="cal-dow">Sun</div>
+    <div class="cal-dow">Mon</div>
+    <div class="cal-dow">Tue</div>
+    <div class="cal-dow">Wed</div>
+    <div class="cal-dow">Thu</div>
+    <div class="cal-dow">Fri</div>
+    <div class="cal-dow">Sat</div>
+
+    <!-- Week 1: Jul 1–5 (blanks Sun–Tue, then Wed 1) -->
+    <div class="cal-day empty"></div>
+    <div class="cal-day empty"></div>
+    <div class="cal-day empty"></div>
+    <div class="cal-day pre"><div class="cal-num" style="color:#bbb;">1</div></div>
+    <div class="cal-day trip c-tokyo">
+      <div class="cal-num">2</div>
+      <div class="cal-city">Tokyo</div>
+      <div class="cal-note">✈️ Arrive HND</div>
+    </div>
+    <div class="cal-day trip c-tokyo">
+      <div class="cal-num">3</div>
+      <div class="cal-city">Tokyo</div>
+      <div class="cal-note">teamLab · Coffee</div>
+    </div>
+    <div class="cal-day trip c-tokyo">
+      <div class="cal-num">4</div>
+      <div class="cal-city">Tokyo</div>
+      <div class="cal-note">Cat cafe · Ramen</div>
+    </div>
+
+    <!-- Week 2: Jul 6–12 -->
+    <div class="cal-day trip c-osaka">
+      <div class="cal-num">5</div>
+      <div class="cal-city">Osaka</div>
+      <div class="cal-note">→ Shinkansen</div>
+    </div>
+    <div class="cal-day trip c-osaka">
+      <div class="cal-num">6</div>
+      <div class="cal-city">Osaka</div>
+      <div class="cal-note">Kuromon · Kaiten</div>
+    </div>
+    <div class="cal-day trip c-sendai">
+      <div class="cal-num">7</div>
+      <div class="cal-city">Sendai</div>
+      <div class="cal-note">→ Head north</div>
+    </div>
+    <div class="cal-day trip c-sendai">
+      <div class="cal-num">8</div>
+      <div class="cal-city">Sendai</div>
+      <div class="cal-note">Matsushima · Oysters</div>
+    </div>
+    <div class="cal-day trip c-zao">
+      <div class="cal-num">9</div>
+      <div class="cal-city">Zao Onsen</div>
+      <div class="cal-note">Naruko Gorge</div>
+    </div>
+    <div class="cal-day trip c-zao">
+      <div class="cal-num">10</div>
+      <div class="cal-city">Zao Onsen</div>
+      <div class="cal-note">Crater lake hike</div>
+    </div>
+    <div class="cal-day trip c-ginzan">
+      <div class="cal-num">11</div>
+      <div class="cal-city">Ginzan</div>
+      <div class="cal-note">Gas lamps · Ryokan</div>
+    </div>
+
+    <!-- Week 3: Jul 13–19 -->
+    <div class="cal-day trip c-tokyo">
+      <div class="cal-num">12</div>
+      <div class="cal-city">Tokyo</div>
+      <div class="cal-note">← Return</div>
+    </div>
+    <div class="cal-day trip c-tokyo">
+      <div class="cal-num">13</div>
+      <div class="cal-city">Tokyo</div>
+      <div class="cal-note">✈️ HND → LHR</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">14</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Arrive · Platform 9¾</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">15</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">WB Studio Tour</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">16</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">HP locations · Tate</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">17</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Natl Gallery · Alan &amp; YY</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">18</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Zoo · Coleen &amp; Harry</div>
+    </div>
+
+    <!-- Week 4: Jul 20–26 -->
+    <div class="cal-day trip c-london">
+      <div class="cal-num">19</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Southall · Indian</div>
+    </div>
+    <div class="cal-day trip c-oxford">
+      <div class="cal-num">20</div>
+      <div class="cal-city">Oxford</div>
+      <div class="cal-note">Day trip · Christ Ch.</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">21</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Borough Mkt · Tayyabs</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">22</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">S. Kensington · Cousin</div>
+    </div>
+    <div class="cal-day trip c-london">
+      <div class="cal-num">23</div>
+      <div class="cal-city">London</div>
+      <div class="cal-note">Final day · Pack</div>
+    </div>
+    <div class="cal-day trip c-depart">
+      <div class="cal-num">24</div>
+      <div class="cal-city">Depart</div>
+      <div class="cal-note">✈️ LHR</div>
+    </div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">25</div></div>
+
+    <!-- Week 5: Jul 27–31 -->
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">26</div></div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">27</div></div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">28</div></div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">29</div></div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">30</div></div>
+    <div class="cal-day post"><div class="cal-num" style="color:#bbb;">31</div></div>
+    <div class="cal-day empty"></div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:#C0392B;"></div>Tokyo</div>
+    <div class="leg"><div class="leg-dot" style="background:#CF6A10;"></div>Osaka</div>
+    <div class="leg"><div class="leg-dot" style="background:#1E8449;"></div>Sendai / Matsushima</div>
+    <div class="leg"><div class="leg-dot" style="background:#1A5276;"></div>Zao Onsen</div>
+    <div class="leg"><div class="leg-dot" style="background:#6C3483;"></div>Ginzan Onsen</div>
+    <div class="leg"><div class="leg-dot" style="background:#2C3E50;"></div>London</div>
+    <div class="leg"><div class="leg-dot" style="background:#117A65;"></div>Oxford (day trip)</div>
+    <div class="leg"><div class="leg-dot" style="background:#555;"></div>Depart</div>
   </div>
 </div>
 
