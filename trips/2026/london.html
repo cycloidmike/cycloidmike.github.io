@@ -102,6 +102,26 @@
     .site-nav { padding: 10px 20px; }
     .trip-title { font-size: 28px; }
   }
+
+  /* scroll animations — appear on enter, fade on leave */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .fade-up.visible  { opacity: 1; transform: translateY(0); }
+  .slide-in {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
+  }
+  .slide-in.visible { opacity: 1; transform: translateX(0); }
+  .stagger-child {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.38s ease, transform 0.38s ease;
+  }
+  .stagger-child.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -275,16 +295,19 @@
   </div>
 
   <div class="day">
-    <div class="day-num"><div class="day-n">21</div><div class="day-dow">Tuesday</div><div class="day-city">South Bank / E1</div></div>
+    <div class="day-num"><div class="day-n">21</div><div class="day-dow">Tuesday</div><div class="day-city">York</div></div>
     <div>
-      <div class="day-title">Borough Market · Shakespeare's Globe · Tayyabs</div>
+      <div class="day-title">York day trip — The Real Diagon Alley</div>
       <div class="segs">
-        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Victoria+Embankment+London">South Bank / Victoria Embankment</a>, flat Thames path</div></div>
-        <div class="seg"><div class="seg-ic">🛒</div><div class="seg-tx"><strong><a href="https://boroughmarket.org.uk/">Borough Market</a></strong> — London's best food market, open Tuesday–Saturday. Neal's Yard cheese stall is essential.</div></div>
-        <div class="seg"><div class="seg-ic">🎭</div><div class="seg-tx"><strong>Shakespeare's Globe</strong> — walk past or catch a matinee. Right on the Thames adjacent to the Millennium Bridge.</div></div>
-        <div class="seg"><div class="seg-ic">🍛</div><div class="seg-tx"><strong><a href="http://www.tayyabs.co.uk/">Tayyabs, Whitechapel</a></strong> — legendary Lahori grill. Tandoor lamb chops sizzle at the table. BYO beer. Book ahead or arrive right at opening.</div></div>
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx"><strong>King's Cross → York</strong> (~2 hours, LNER). Departing from King's Cross is perfectly poetic — this is where Platform 9¾ is. Book in advance on <a href="https://www.thetrainline.com/">Trainline</a>.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=The+Shambles+York+England">The Shambles</a></strong> — the medieval street most directly credited as the inspiration for Diagon Alley. Timber-framed buildings lean toward each other over a cobbled lane barely wide enough for two. There's a dedicated Harry Potter shop on the street. Walk it slowly; it genuinely looks like a film set.</div></div>
+        <div class="seg"><div class="seg-ic">⚡</div><div class="seg-tx"><strong><a href="https://www.yorkminster.org/">York Minster</a></strong> — one of the great Gothic cathedrals of Europe. The medieval stained glass is extraordinary and the nave feels like something out of a fantasy novel.</div></div>
+        <div class="seg"><div class="seg-ic">🏃</div><div class="seg-tx"><strong>Trish: run the city walls</strong> — York has a complete medieval wall circuit (~5km) you can run on top of. One of the most unusual running routes in England, with views into the city the whole way round.</div></div>
+        <div class="seg"><div class="seg-ic">🛒</div><div class="seg-tx"><strong><a href="https://www.google.com/maps/search/?api=1&query=York+Shambles+Market">Shambles Market</a></strong> — the covered market right beside The Shambles. Yorkshire produce, street food, excellent sausage rolls.</div></div>
+        <div class="seg"><div class="seg-ic">🚆</div><div class="seg-tx">Return to London by early evening — LNER trains run frequently. Tayyabs for dinner when back in town (see Day 22).</div></div>
       </div>
-      <div class="tags"><span class="tag t-food">Borough Market</span><span class="tag t-food">Tayyabs</span><span class="tag t-run">Run</span></div>
+      <div class="tags"><span class="tag t-hp">The Shambles</span><span class="tag t-hp">Diagon Alley</span><span class="tag t-run">City Walls</span><span class="tag t-travel">Day trip</span><span class="tag t-sausage">Yorkshire rolls</span></div>
+      <div class="tip">Go early morning or after 4pm — The Shambles gets crowded in July. The Harry Potter shop is on the street itself, not a side alley.</div>
     </div>
   </div>
 
@@ -303,7 +326,8 @@
         <div class="seg"><div class="seg-ic">👤</div><div class="seg-tx"><strong>Cousin, South Kensington</strong> — lunch or dinner in the neighbourhood. Brompton Road, Thurloe Street, and Old Brompton Road have excellent restaurants. Let them pick their local favourite.</div></div>
         <div class="seg"><div class="seg-ic">🌳</div><div class="seg-tx"><strong>Kensington Gardens</strong> — walk off lunch through the park. The Serpentine Gallery (free, contemporary art) is worth a look if you wander that way.</div></div>
         <div class="seg"><div class="seg-ic">🥐</div><div class="seg-tx"><strong><a href="https://stjohnrestaurant.com/a/restaurants/bread-and-wine">St John Bread and Wine</a></strong>, Spitalfields — the artisan sausage roll. Warm, flaky, deeply savoury. Open from noon.</div></div>
-        <div class="seg"><div class="seg-ic">🍮</div><div class="seg-tx"><strong>Sticky toffee pudding</strong> — any good gastropub around Kensington or Spitalfields. Ask your server.</div></div>
+        <div class="seg"><div class="seg-ic">🍮</div><div class="seg-tx"><strong>Sticky toffee pudding</strong> — any good gastropub around Kensington. Ask your server.</div></div>
+        <div class="seg"><div class="seg-ic">🍛</div><div class="seg-tx"><strong>Evening: <a href="http://www.tayyabs.co.uk/">Tayyabs, Whitechapel</a></strong> — legendary Lahori grill on the way back east. Tandoor lamb chops sizzle at the table. BYO beer. Always packed — book ahead or arrive right at opening.</div></div>
       </div>
       <div class="tags"><span class="tag t-friends">Cousin</span><span class="tag t-run">Hyde Park</span><span class="tag t-sausage">St John</span><span class="tag t-sticky">Sticky toffee</span></div>
     </div>
@@ -352,5 +376,33 @@
   <div style="margin-top:16px;"><a href="japan.html" class="japan-link">← View Japan itinerary 🇯🇵</a></div>
 </div>
 
+
+<script>
+  // Appear on scroll in, disappear on scroll out
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const delay = Math.min(siblings.indexOf(entry.target) * 45, 180);
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -28px 0px' });
+
+  document.querySelectorAll('.phase').forEach(el => {
+    el.classList.add('slide-in'); obs.observe(el);
+  });
+  document.querySelectorAll('.day').forEach(el => {
+    el.classList.add('fade-up'); obs.observe(el);
+  });
+  document.querySelectorAll('.note, .tip, .baby').forEach(el => {
+    el.classList.add('fade-up'); obs.observe(el);
+  });
+  document.querySelectorAll('.book-item').forEach(el => {
+    el.classList.add('stagger-child'); obs.observe(el);
+  });
+</script>
 </body>
 </html>
