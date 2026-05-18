@@ -269,6 +269,26 @@
     .header::before { display: none; }
     .day-card { grid-template-columns: 60px 1fr; gap: 12px; }
   }
+
+  /* scroll animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s cubic-bezier(.16,1,.3,1), transform 0.55s cubic-bezier(.16,1,.3,1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .slide-in {
+    opacity: 0;
+    transform: translateX(-22px);
+    transition: opacity 0.5s cubic-bezier(.16,1,.3,1), transform 0.5s cubic-bezier(.16,1,.3,1);
+  }
+  .slide-in.visible { opacity: 1; transform: translateX(0); }
+  .stagger-child {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .stagger-child.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -310,18 +330,18 @@
 <div class="quick-links">
   <h3>📌 Book These in Advance</h3>
   <div class="links-grid">
-    <div class="link-item"><span>🎨</span><a href="https://www.teamlab.art/e/tokyo/" target="_blank">teamLab Borderless Tickets</a></div>
-    <div class="link-item"><span>🏯</span><a href="https://www.notoyaryokan.com/" target="_blank">Notoya Ryokan, Ginzan</a></div>
-    <div class="link-item"><span>🏯</span><a href="https://www.fujiya-ginzan.com/" target="_blank">Fujiya Ryokan, Ginzan</a></div>
-    <div class="link-item"><span>🚅</span><a href="https://www.jrpass.com/" target="_blank">JR Pass (consider buying)</a></div>
-    <div class="link-item"><span>🗺️</span><a href="https://www.hyperdia.com/" target="_blank">Hyperdia — Train Routes</a></div>
-    <div class="link-item"><span>🍜</span><a href="https://www.fu-unji.com/" target="_blank">Fuunji Ramen, Shinjuku</a></div>
-    <div class="link-item"><span>🎨</span><a href="https://www.teamlab.art/e/tokyo/" target="_blank">teamLab (closed Tuesdays!)</a></div>
-    <div class="link-item"><span>🐱</span><a href="https://catmocha.jp/en/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a>
-    <div class="link-item"><span>☕</span><a href="https://arabica.com/location/arabica-tokyo-azabudai-hills-b1/" target="_blank">% Arabica Azabudai Hills</a></div>
-    <div class="link-item"><span>🍣</span><a href="https://en.ichiran.com/shop/tohoku/sendai/" target="_blank">Ichiran Sendai (24hr)</a></div>
-    <div class="link-item"><span>🚡</span><a href="https://www.zao-ropeway.co.jp/en/" target="_blank">Zao Ropeway Info</a></div>
-    <div class="link-item"><span>🌊</span><a href="https://www.matsushima-kanko.com/en/" target="_blank">Matsushima Tourism</a></div>
+    <div class="link-item"><span>🎨</span><a href="https://www.teamlab.art/e/tokyo/" target="_blank">teamLab Borderless</a><br><small style="color:#7a6f65;font-size:11px;">Closed Tuesdays · books out fast in July</small></div>
+    <div class="link-item"><span>🏯</span><a href="https://www.notoyaryokan.com/" target="_blank">Notoya Ryokan, Ginzan</a><br><small style="color:#7a6f65;font-size:11px;">Request kashikiri (private bath) when booking</small></div>
+    <div class="link-item"><span>🏯</span><a href="https://www.fujiya-ginzan.com/" target="_blank">Fujiya Ryokan, Ginzan</a><br><small style="color:#7a6f65;font-size:11px;">Only ~10 ryokan in Ginzan · fills months ahead</small></div>
+    <div class="link-item"><span>🚅</span><a href="https://www.jrpass.com/" target="_blank">JR Pass</a><br><small style="color:#7a6f65;font-size:11px;">Buy before you leave · covers all Shinkansen</small></div>
+    <div class="link-item"><span>🗺️</span><a href="https://www.hyperdia.com/" target="_blank">Hyperdia</a><br><small style="color:#7a6f65;font-size:11px;">Plan every train connection in Japan</small></div>
+    <div class="link-item"><span>🍜</span><a href="https://www.fu-unji.com/" target="_blank">Fuunji Ramen</a><br><small style="color:#7a6f65;font-size:11px;">Arrive before 11am opening to beat the queue</small></div>
+    <div class="link-item"><span>🐱</span><a href="https://catmocha.jp/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a><br><small style="color:#7a6f65;font-size:11px;">Weekday mornings are best · no advance booking</small></div>
+    <div class="link-item"><span>☕</span><a href="https://arabica.com/location/arabica-tokyo-azabudai-hills-b1/" target="_blank">% Arabica Azabudai Hills</a><br><small style="color:#7a6f65;font-size:11px;">Opens 8am · right next to teamLab</small></div>
+    <div class="link-item"><span>🚡</span><a href="https://www.zao-ropeway.co.jp/en/" target="_blank">Zao Ropeway</a><br><small style="color:#7a6f65;font-size:11px;">Opens 8:30am · go early before afternoon clouds</small></div>
+    <div class="link-item"><span>🌊</span><a href="https://www.matsushima-kanko.com/en/" target="_blank">Matsushima Tourism</a><br><small style="color:#7a6f65;font-size:11px;">Senseki Line from Sendai · ~30 min</small></div>
+    <div class="link-item"><span>🌆</span><a href="https://www.shibuya-scramble-square.com/sky/en/" target="_blank">Shibuya Sky Observation Deck</a><br><small style="color:#7a6f65;font-size:11px;">Book timed entry · sunset slot is the one to get</small></div>
+    <div class="link-item"><span>🥩</span><a href="https://www.google.com/maps/search/?api=1&query=Rikyu+gyutan+Sendai" target="_blank">Rikyu Gyutan, Sendai</a><br><small style="color:#7a6f65;font-size:11px;">Sendai's most famous dish · queue at lunch</small></div>
   </div>
 </div>
 
@@ -347,7 +367,7 @@
       <div class="segments">
         <div class="segment"><div class="seg-icon">✈️</div><div class="seg-text"><strong>Arrive HND 3:50pm</strong> — take the <a href="https://www.google.com/maps/search/?api=1&query=Keikyu+Line+Haneda+Airport+Tokyo" target="_blank">Keikyu Line</a> into the city (~35 min to Shinagawa). IC card (Suica/Pasmo) from airport machines.</div></div>
         <div class="segment"><div class="seg-icon">🏨</div><div class="seg-text">Check in, drop bags, freshen up</div></div>
-        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Dinner with sister's family</strong> — ramen at <a href="https://en.ichiran.com/" target="_blank">Ichiran Shibuya</a>, solo booths, decompress from the flight</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Dinner with sister's family</strong> — ramen at <a href="https://ichiran.com/en/" target="_blank">Ichiran Shibuya</a>, solo booths, decompress from the flight</div></div>
         <div class="segment"><div class="seg-icon">🌃</div><div class="seg-text">Early night — beat jet lag by staying up until 9–10pm local time</div></div>
       </div>
       <div class="tags"><span class="tag tag-ramen">Ramen</span><span class="tag tag-sister">With Sister</span></div>
@@ -366,7 +386,7 @@
         <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Park+Tokyo" target="_blank">Yoyogi Park loop</a> (~5km), flat paths, beautiful tree canopy, very popular with local runners early morning</div></div>
         <div class="segment"><div class="seg-icon">☕</div><div class="seg-text"><strong><a href="https://arabica.com/location/arabica-tokyo-azabudai-hills-b1/" target="_blank">% Arabica Azabudai Hills</a></strong> — futuristic all-white space, Kyoto latte is exceptional. Right next to teamLab. Opens 8am. <a href="https://www.google.com/maps/search/?api=1&query=Arabica+Coffee+Azabudai+Hills+Tokyo" target="_blank">Map →</a></div></div>
         <div class="segment"><div class="seg-icon">🎨</div><div class="seg-text"><strong><a href="https://www.teamlab.art/e/tokyo/" target="_blank">teamLab Borderless</a></strong> (Azabudai Hills B1) — <strong style="color:#c0392b">closed Tuesdays, book in advance</strong>. 3–4 hours. Immersive digital art, the spiritual successor to Robot Restaurant's spectacle. Rated 4.6 ⭐. <a href="https://www.google.com/maps/search/?api=1&query=teamLab+Borderless+Azabudai+Hills+Tokyo" target="_blank">Map →</a></div></div>
-        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi dinner</strong> — <a href="https://www.uobei.jp/" target="_blank">Uobei Shibuya</a> or Sushiro: good intro to conveyor belt before Tohoku's superior seafood</div></div>
+        <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong>Ramen dinner</strong> — try a different style from your first night. <a href="https://afuri.com/en/" target="_blank">Afuri</a> in Harajuku does an exceptional yuzu shio (citrus salt broth) — light and fragrant, completely different from rich miso or tonkotsu.</div></div>
       </div>
       <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-coffee">Coffee</span><span class="tag tag-art">Art</span><span class="tag tag-sushi">Kaiten-Zushi</span><span class="tag tag-sister">With Sister</span></div>
       <div class="note-box">⚠️ teamLab is <strong>closed Tuesdays</strong>. Book tickets online at least 2–3 weeks in advance — they sell out, especially in July.</div>
@@ -383,9 +403,9 @@
       <div class="day-title">Cat Cafes, Tsukemen &amp; Shinjuku</div>
       <div class="segments">
         <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Imperial+Palace+running+course+Tokyo" target="_blank">Imperial Palace outer loop</a> (~5km), Tokyo's most iconic flat running route, popular with locals every morning</div></div>
-        <div class="segment"><div class="seg-icon">🐱</div><div class="seg-text"><strong><a href="https://catmocha.jp/en/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a></strong> — open 10am, well-cared-for cats, lovely window views, Trish's kind of place. <a href="https://www.google.com/maps/search/?api=1&query=Cat+Cafe+MOCHA+Ikebukuro+Tokyo" target="_blank">Map →</a></div></div>
+        <div class="segment"><div class="seg-icon">🐱</div><div class="seg-text"><strong><a href="https://catmocha.jp/shop/ikebukuro/" target="_blank">Cat Cafe MOCHA Ikebukuro</a></strong> — open 10am, well-cared-for cats, lovely window views, Trish's kind of place. <a href="https://www.google.com/maps/search/?api=1&query=Cat+Cafe+MOCHA+Ikebukuro+Tokyo" target="_blank">Map →</a></div></div>
         <div class="segment"><div class="seg-icon">🍜</div><div class="seg-text"><strong><a href="https://www.fu-unji.com/" target="_blank">Fuunji Shinjuku</a></strong> for lunch — legendary tsukemen (thick dipping ramen). Arrive 10:40am, opens 11am. Worth the queue. <a href="https://www.google.com/maps/search/?api=1&query=Fuunji+ramen+Shinjuku+Tokyo" target="_blank">Map →</a></div></div>
-        <div class="segment"><div class="seg-icon">🌆</div><div class="seg-text">Evening at <a href="https://www.google.com/maps/search/?api=1&query=Omoide+Yokocho+Shinjuku+Tokyo" target="_blank">Omoide Yokocho</a> (Memory Lane, Shinjuku) for yakitori, then <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Crossing+Tokyo" target="_blank">Shibuya Crossing</a> at dusk with the family</div></div>
+        <div class="segment"><div class="seg-icon">🌆</div><div class="seg-text">Early evening at <a href="https://www.google.com/maps/search/?api=1&query=Omoide+Yokocho+Shinjuku+Tokyo" target="_blank">Omoide Yokocho</a> (Memory Lane, Shinjuku) for yakitori under the railway arches with the family</div></div><div class="segment"><div class="seg-icon">🌃</div><div class="seg-text"><strong><a href="https://www.shibuya-scramble-square.com/sky/en/" target="_blank">Shibuya Sky</a> — rooftop observation deck</strong> — 229m up on Shibuya Scramble Square, with a fully outdoor viewing platform over the city. From up here the famous Scramble Crossing below looks like a living circuit board. Sunset slot is the one to book — you watch the city turn from gold to neon. Reserve timed entry in advance.</div></div>
       </div>
       <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-cat">Cat Cafe</span><span class="tag tag-ramen">Tsukemen</span><span class="tag tag-sister">With Sister</span></div>
     </div>
@@ -428,7 +448,7 @@
       <div class="segments">
         <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Osaka+Castle+Park" target="_blank">Osaka Castle Park loop</a> (~4km), moats and stone walls, stunning early morning light</div></div>
         <div class="segment"><div class="seg-icon">🦐</div><div class="seg-text"><strong><a href="https://kuromon.com/en/" target="_blank">Kuromon Market</a></strong> (9am, before crowds) — fresh wagyu skewers, oysters, uni on rice. Osaka's kitchen. <a href="https://www.google.com/maps/search/?api=1&query=Kuromon+Market+Osaka" target="_blank">Map →</a></div></div>
-        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi lunch</strong> — <a href="https://www.uobei.jp/" target="_blank">Uobei Shinsaibashi</a>: tablet-ordering conveyor belt, great value and fresh Osaka-area fish</div></div>
+        <div class="segment"><div class="seg-icon">🥞</div><div class="seg-text"><strong>Okonomiyaki lunch</strong> — Osaka's signature dish and something you can't get as well anywhere else. <a href="https://www.google.com/maps/search/?api=1&query=Mizuno+okonomiyaki+Dotonbori+Osaka" target="_blank">Mizuno on Dotonbori</a> has been going since 1945 and still has queues to match. The Osaka style is layered, not folded — make sure to get the right one.</div></div>
         <div class="segment"><div class="seg-icon">🌆</div><div class="seg-text">Afternoon at <a href="https://www.google.com/maps/search/?api=1&query=Shinsekai+Osaka" target="_blank">Shinsekai</a> &amp; <a href="https://www.google.com/maps/search/?api=1&query=Tsutenkaku+Tower+Osaka" target="_blank">Tsutenkaku Tower</a> — retro old-Osaka neighbourhood</div></div>
         <div class="segment"><div class="seg-icon">🍢</div><div class="seg-text">Final family dinner — Kushikatsu (deep-fried skewers, Osaka's specialty). Rule: no double-dipping the sauce!</div></div>
       </div>
@@ -475,10 +495,10 @@
       <div class="segments">
         <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Morning run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Hirose+River+Sendai+Japan" target="_blank">Hirose River path</a>, flat, tree-lined, popular with locals. 5–10km along the riverbank through the city.</div></div>
         <div class="segment"><div class="seg-icon">🌊</div><div class="seg-text"><strong><a href="https://www.matsushima-kanko.com/en/" target="_blank">Matsushima</a> day trip</strong> (~30 min by Senseki Line) — one of Japan's Three Views: pine-covered islands scattered across a bay. Walk coastal paths, visit <a href="https://www.google.com/maps/search/?api=1&query=Zuiganji+Temple+Matsushima+Japan" target="_blank">Zuiganji Temple</a>. <a href="https://www.google.com/maps/search/?api=1&query=Matsushima+Bay+Miyagi+Japan" target="_blank">Map →</a></div></div>
-        <div class="segment"><div class="seg-icon">🦪</div><div class="seg-text"><strong>Grilled oysters at Matsushima</strong> — the bay is famous for them, eaten straight from the shell at waterfront stalls. Don't miss.</div></div>
-        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi dinner in Sendai</strong> — Sanriku coast fish makes this exceptional. Order from the tablet: salmon, scallop, uni if available. Ask your hotel for the best local spot.</div></div>
+        <div class="segment"><div class="seg-icon">🦪</div><div class="seg-text"><strong>Grilled oysters at Matsushima</strong> — the bay is famous for them, eaten straight from the shell at waterfront stalls. Don't miss.</div></div><div class="segment"><div class="seg-icon">⛩️</div><div class="seg-text"><strong><a href="https://www.google.com/maps/search/?api=1&query=Zuihoden+Mausoleum+Sendai+Japan" target="_blank">Zuihoden Mausoleum</a></strong> — the ornate resting place of Date Masamune, Sendai's legendary feudal lord, set in a cedar forest above the city. Most visitors skip it entirely; don't be one of them. The lacquered black-and-gold architecture is extraordinary and the cedar path up to it is one of the most atmospheric walks in Tohoku. About 15 min by taxi from Sendai station.</div></div>
+        <div class="segment"><div class="seg-icon">🥩</div><div class="seg-text"><strong>Gyutan dinner at Rikyu</strong> — grilled beef tongue is the signature dish of Sendai and nothing like what you'd find anywhere else. <a href="https://www.google.com/maps/search/?api=1&query=Rikyu+gyutan+Sendai+Japan" target="_blank">Rikyu</a> is the most famous, with thick-cut tongue served over barley rice with oxtail soup. Queue at dinner or book ahead. This is the must-eat of Tohoku.</div></div>
       </div>
-      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-sushi">Kaiten-Zushi</span><span class="tag tag-hike">Coastal Walk</span></div>
+      <div class="tags"><span class="tag tag-run">Run</span><span class="tag tag-ramen">Gyutan</span><span class="tag tag-hike">Coastal Walk</span></div>
     </div>
   </div>
 
@@ -576,7 +596,7 @@
       <div class="segments">
         <div class="segment"><div class="seg-icon">🏃</div><div class="seg-text"><strong>Trish: Final run</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Shinjuku+Gyoen+Tokyo" target="_blank">Shinjuku Gyoen</a> or <a href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Park+Tokyo" target="_blank">Yoyogi Park</a>, a beautiful Tokyo send-off morning</div></div>
         <div class="segment"><div class="seg-icon">☕</div><div class="seg-text"><strong>Final coffee</strong> — <a href="https://www.google.com/maps/search/?api=1&query=Onibus+Coffee+Nakameguro+Tokyo" target="_blank">Onibus Coffee Nakameguro</a> or <a href="https://www.google.com/maps/search/?api=1&query=Bear+Pond+Espresso+Tokyo" target="_blank">Bear Pond Espresso</a>. Make it count.</div></div>
-        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Last kaiten-zushi lunch</strong> — one more conveyor belt round before London. Ask hotel for the nearest good one.</div></div>
+        <div class="segment"><div class="seg-icon">🍣</div><div class="seg-text"><strong>Kaiten-zushi farewell lunch at <a href="https://www.sushiro.co.jp/en/" target="_blank">Sushiro</a></strong> — Japan's best kaiten-zushi chain and the one worth going out of your way for. Order from the touchscreen tablet, not the belt — the made-to-order pieces are fresher and the seasonal fish is listed there. Uni, ikura, fatty tuna. One last round before London.</div></div>
         <div class="segment"><div class="seg-icon">😴</div><div class="seg-text">Hotel rest / afternoon nap — flight boards around 11pm at Haneda</div></div>
         <div class="segment"><div class="seg-icon">✈️</div><div class="seg-text"><strong>Depart HND 12:15am July 14</strong> → <a href="https://www.google.com/maps/search/?api=1&query=London+Heathrow+Airport" target="_blank">London Heathrow</a>, arrives 6:25am. Next stop: London!</div></div>
       </div>
@@ -594,5 +614,46 @@
   <p style="margin-top:16px;"><a href="london.html" style="display:inline-flex;align-items:center;gap:6px;background:#1a1410;color:#f5f0e8;text-decoration:none;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:500;">View London itinerary 🇬🇧 →</a></p>
 </div>
 
+
+<script>
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Slight stagger based on element index within its parent
+        const siblings = Array.from(entry.target.parentElement.children);
+        const delay = siblings.indexOf(entry.target) * 40;
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  // Phase headers slide in from left
+  document.querySelectorAll('.phase-header').forEach(el => {
+    el.classList.add('slide-in');
+    observer.observe(el);
+  });
+
+  // Day cards fade up
+  document.querySelectorAll('.day-card').forEach(el => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
+
+  // Quick-links items stagger in
+  document.querySelectorAll('.link-item').forEach(el => {
+    el.classList.add('stagger-child');
+    observer.observe(el);
+  });
+
+  // Note boxes fade up
+  document.querySelectorAll('.note-box').forEach(el => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
