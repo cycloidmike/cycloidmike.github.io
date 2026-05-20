@@ -618,17 +618,15 @@
 
 
 <script>
-  // Scroll-triggered animations
+  // Scroll animations — appear on enter, disappear on leave
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Slight stagger based on element index within its parent
         const siblings = Array.from(entry.target.parentElement.children);
-        const delay = siblings.indexOf(entry.target) * 40;
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, delay);
-        observer.unobserve(entry.target);
+        const delay = Math.min(siblings.indexOf(entry.target) * 45, 180);
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+      } else {
+        entry.target.classList.remove('visible');
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
