@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packing Checklist — Summer 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f1eb; color: #1a1a18; font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; max-width: 860px; margin: 0 auto; padding: 0 0 60px; }
+
+  /* NAV */
+  nav { background: #1a1a18; padding: 12px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-title { color: #f4f1eb; font-size: 14px; font-weight: 500; }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a { color: rgba(244,241,235,0.65); font-size: 13px; font-weight: 500; text-decoration: none; }
+  .nav-links a:hover, .nav-links a.active { color: #f4f1eb; }
+
+  /* HEADER */
+  .header { background: #1a1a18; color: #f4f1eb; padding: 44px 48px 38px; position: relative; overflow: hidden; }
+  .header::before { content: '✓'; position: absolute; right: 28px; top: -8px; font-size: 130px; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; }
+  .trip-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .trip-sub { font-size: 13px; color: rgba(244,241,235,0.5); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .weather-strip { display: flex; gap: 20px; flex-wrap: wrap; }
+  .weather-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: rgba(244,241,235,0.8); }
+
+  /* PROGRESS */
+  .progress-bar-wrap { background: #e8e3d8; padding: 16px 48px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(0,0,0,0.07); position: sticky; top: 0; z-index: 10; }
+  .progress-label { font-size: 13px; font-weight: 500; white-space: nowrap; min-width: 100px; }
+  .progress-track { flex: 1; height: 6px; background: rgba(0,0,0,0.12); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #2d6a2d; border-radius: 3px; transition: width 0.3s ease; }
+  .reset-btn { font-size: 11px; color: #7a7570; background: none; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; padding: 4px 10px; cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+  .reset-btn:hover { border-color: rgba(0,0,0,0.3); color: #444; }
+
+  /* CONTENT */
+  .content { padding: 0 48px; }
+
+  /* SECTION */
+  .section { margin-top: 32px; }
+  .section-header { display: flex; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 2px solid #1a1a18; margin-bottom: 4px; }
+  .section-icon { font-size: 18px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; }
+  .section-count { font-size: 11px; color: #7a7570; margin-left: auto; }
+
+  /* CLIMATE NOTE */
+  .climate-note { background: rgba(0,0,0,0.04); border-radius: 6px; padding: 10px 14px; font-size: 12.5px; color: #555; margin: 10px 0 4px; line-height: 1.5; }
+  .climate-note strong { color: #1a1a18; }
+
+  /* ITEM */
+  .item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,0.06); cursor: pointer; transition: background 0.1s; border-radius: 4px; }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: rgba(0,0,0,0.02); }
+  .item input[type="checkbox"] { display: none; }
+  .check-box { width: 20px; height: 20px; border: 2px solid rgba(0,0,0,0.2); border-radius: 5px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; background: white; }
+  .check-box::after { content: ''; width: 5px; height: 9px; border: 2px solid white; border-top: none; border-left: none; transform: rotate(45deg) scale(0) translateY(-1px); transition: transform 0.15s; }
+  .item.checked .check-box { background: #2d6a2d; border-color: #2d6a2d; }
+  .item.checked .check-box::after { transform: rotate(45deg) scale(1) translateY(-1px); }
+  .item.checked .item-text { color: #aaa; text-decoration: line-through; text-decoration-color: rgba(0,0,0,0.2); }
+  .item-text { flex: 1; font-size: 13.5px; line-height: 1.5; }
+  .item-text strong { font-weight: 600; color: #1a1a18; }
+  .item-text small { display: block; font-size: 11.5px; color: #7a7570; margin-top: 2px; }
+  .item.checked .item-text strong { color: #aaa; }
+  .badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px; margin-top: 3px; display: inline-block; }
+  .badge-rec { background: rgba(45,106,45,0.1); color: #2d6a2d; }
+  .badge-jp  { background: rgba(192,57,43,0.1); color: #c0392b; }
+  .badge-uk  { background: rgba(44,62,80,0.1); color: #2c3e50; }
+  .badge-both { background: rgba(0,0,0,0.07); color: #444; }
+  .badge-tip { background: rgba(138,106,0,0.12); color: #7a6000; }
+
+  /* eSIM DARK CARDS */
+  .esim-section { background: #1a1a18; padding: 28px 48px 32px; margin: 32px -48px 0; color: #f4f1eb; }
+  .esim-section-header { display: flex; align-items: baseline; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; }
+  .esim-section-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; }
+  .esim-section-sub { font-size: 12px; color: rgba(244,241,235,0.45); }
+  .esim-verdict { font-size: 13px; color: rgba(244,241,235,0.65); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
+  .esim-verdict strong { color: #f4f1eb; }
+  .esim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .esim-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; padding: 18px 20px; }
+  .esim-card-flag { font-size: 20px; margin-bottom: 8px; }
+  .esim-card-title { font-size: 14px; font-weight: 600; margin-bottom: 1px; }
+  .esim-card-dates { font-size: 10px; color: rgba(244,241,235,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+  .esim-rec-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(244,241,235,0.4); font-weight: 600; margin-bottom: 5px; }
+  .esim-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 9px; border-radius: 5px; background: rgba(255,255,255,0.05); margin-bottom: 4px; }
+  .esim-row.top { background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.12); }
+  .esim-row-name { font-size: 12.5px; font-weight: 500; }
+  .esim-row-name small { display: block; font-size: 10px; color: rgba(244,241,235,0.4); font-weight: 400; margin-top: 1px; }
+  .esim-row-price { font-size: 12.5px; font-weight: 600; color: #a8d5b5; padding-left: 10px; white-space: nowrap; }
+  .esim-note { font-size: 11px; color: rgba(244,241,235,0.45); line-height: 1.55; margin-top: 10px; }
+  .esim-note a { color: rgba(168,213,181,0.8); }
+  .esim-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .esim-box { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px 18px; }
+  .esim-box-title { font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(244,241,235,0.4); font-weight: 600; margin-bottom: 10px; }
+  .cost-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px; }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-label { color: rgba(244,241,235,0.6); }
+  .cost-val { font-weight: 500; }
+  .cost-row.win { color: #a8d5b5; font-weight: 600; }
+  .setup-step { display: flex; gap: 9px; align-items: flex-start; margin-bottom: 9px; font-size: 12px; color: rgba(244,241,235,0.7); line-height: 1.45; }
+  .setup-step:last-child { margin-bottom: 0; }
+  .step-num { background: rgba(255,255,255,0.12); border-radius: 50%; width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #f4f1eb; margin-top: 1px; }
+  .compat-note { margin-top: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 11px 14px; font-size: 11.5px; color: rgba(244,241,235,0.45); line-height: 1.55; }
+  .compat-note strong { color: rgba(244,241,235,0.75); }
+
+  /* FOOTER */
+  .page-footer { margin: 40px 48px 0; padding: 20px 0 0; border-top: 1px solid rgba(0,0,0,0.1); font-size: 12px; color: #7a7570; }
+
+  @media (max-width: 600px) {
+    .header, .content, .page-footer { padding-left: 20px; padding-right: 20px; }
+    nav { padding: 10px 20px; }
+    .progress-bar-wrap { padding: 12px 20px; }
+    .esim-section { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+    .esim-grid, .esim-bottom { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">Summer 2026 Trip</span>
+  <div class="nav-links">
+    <a href="japan.html">🇯🇵 Japan</a>
+    <a href="london.html">🇬🇧 London</a>
+    <a href="checklist.html" class="active">✅ Checklist</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="trip-title">Packing &amp; Prep Checklist</div>
+  <div class="trip-sub">Japan · London · July 2026</div>
+  <div class="weather-strip">
+    <span class="weather-pill">🌡️ Tokyo/Osaka: 30–35°C · Very humid</span>
+    <span class="weather-pill">🏔️ Tohoku (Zao/Ginzan): 15–22°C · Cool evenings</span>
+    <span class="weather-pill">🌥️ London: 18–25°C · Bring a rain layer</span>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-label" id="progress-label">0 / 0 packed</div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <button class="reset-btn" onclick="resetAll()">Reset all</button>
+</div>
+
+<div class="content">
+
+  <!-- ── DOCUMENTS & BOOKINGS ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📄</span>
+      <span class="section-title">Documents &amp; Bookings</span>
+      <span class="section-count" id="count-docs"></span>
+    </div>
+    <div class="climate-note">Print or save offline copies of everything — Japanese rural areas and airports sometimes have poor data signals.</div>
+    <div class="checklist-group" id="docs">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Passports</strong> — valid for at least 6 months beyond July 24 <small>Check expiry dates now</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Travel insurance cards &amp; policy number</strong> <small>Screenshot and save offline</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Flight confirmations</strong> — all three legs <small>HND arrive, HND→LHR, LHR depart</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Hotel confirmations</strong> — Japan ryokan + London hotels <small>Ginzan ryokan especially — confirm kashikiri bath slot</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>teamLab Borderless tickets</strong> <span class="badge badge-jp">Japan</span><small>Book well in advance — sells out in July. Closed Tuesdays.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>WB Studio Tour tickets</strong> <span class="badge badge-uk">London</span><small>Sells out months ahead in peak July</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Zao Ropeway info &amp; opening times</strong> <span class="badge badge-jp">Japan</span><small>Opens 8:30am · go early before afternoon clouds</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Tour for Muggles booking</strong> <span class="badge badge-uk">London</span><small>Closed Mondays · rated 4.9⭐ · book ahead</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Omakase dinner reservation</strong> <span class="badge badge-jp">Japan</span><small>Harutaka (Ginza) or Sushi Sho (Yotsuya) — book 2–3 months ahead</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>JR Pass activated</strong> <span class="badge badge-jp">Japan</span><small>Buy before departure — covers all Shinkansen legs</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>York &amp; Oxford train tickets</strong> <span class="badge badge-uk">London</span><small>Book on Trainline — King's Cross→York, Paddington→Oxford</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── TECH & POWER ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔌</span>
+      <span class="section-title">Tech &amp; Power</span>
+      <span class="section-count" id="count-tech"></span>
+    </div>
+    <div class="climate-note"><strong>Adapters:</strong> Japan uses Type A plugs — same as the US, no adapter needed. UK uses Type G (3-pin). Bring at least 2 UK adapters or one universal.</div>
+    <div class="checklist-group" id="tech">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Power bank — Anker PowerCore 20000</strong> <span class="badge badge-rec">Recommended</span><small>20,000mAh · charges both phones 3–4× · ~$45. Must go in carry-on (TSA prohibits in checked bags). Two if one each is preferred.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>UK plug adapters (Type G)</strong> × 2 <span class="badge badge-uk">London</span><small>Or one EPICKA universal adapter (~$25). Japan doesn't need one.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>USB-C charging cables</strong> × 2 <small>One for each person — 2m length is useful in hotel rooms</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Phone chargers / wall bricks</strong> <small>Modern GaN chargers (Anker Nano, ~$20) are dual-voltage — no need for a voltage converter</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>eSIMs installed on both phones</strong> <small>Install Japan eSIM before departure — don't activate yet. See eSIM section below.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Earphones / AirPods</strong> <small>Essential for long Shinkansen rides and the overnight HND→LHR flight</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Offline maps downloaded</strong> <small>Google Maps: download Tokyo, Osaka, Yamagata, London offline before flying. Works without data.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Google Translate app + Japanese downloaded</strong> <span class="badge badge-jp">Japan</span><small>Camera translate mode is essential for menus. Download language pack offline.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>IC card (Suica / Pasmo)</strong> <span class="badge badge-jp">Japan</span><small>Add to Apple/Google Wallet or pick up a physical card at HND airport. Covers all trains and buses in Japan.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Camera (optional)</strong> <small>Japan especially rewards a dedicated camera — Ginzan at dusk, Zao crater lake, Matsushima coast</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── CLOTHING: JAPAN ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">👕</span>
+      <span class="section-title">Clothing — Japan</span>
+      <span class="section-count" id="count-jp-clothes"></span>
+    </div>
+    <div class="climate-note"><strong>Tokyo &amp; Osaka:</strong> 30–35°C, extremely humid in July — rainy season just ending. Sweat is unavoidable; moisture-wicking fabrics make a real difference. Bring a light layer for heavily air-conditioned interiors (trains, restaurants, convenience stores are kept very cold). <strong>Tohoku (Zao/Ginzan):</strong> Mountain elevation brings temperatures down to 15–22°C — a light fleece or jacket is needed, especially for the Zao crater hike and evening onsen walks.</div>
+    <div class="checklist-group" id="jp-clothes">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Lightweight moisture-wicking t-shirts / tops</strong> × 6–7 <small>Linen or technical fabric. Japan's summer heat makes breathability essential. Aim to do laundry once mid-trip — many ryokan and hotels have coin laundry.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Lightweight shorts or linen trousers</strong> × 3 <small>Shorts for Tokyo/Osaka days, one pair of light long trousers for temples, restaurants</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>One smart casual outfit</strong> <span class="badge badge-tip">Honeymoon dinner</span><small>For the omakase dinner in Ginza (Day 4). Japan doesn't require formal dress — clean, neat and non-athletic is the standard.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Light cardigan or long-sleeve layer</strong> × 1 <small>Specifically for indoor air conditioning — Japan keeps interiors aggressively cold. A thin packable layer lives in your day bag.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Light fleece or zip-up</strong> × 1 <span class="badge badge-jp">Tohoku</span><small>For Zao crater hike (summit ~15°C), evening at Ginzan, and the ryokan garden at night</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Compact rain jacket</strong> × 1 (each) <small>Summer rain in Japan is sudden and heavy. Packable is key — it needs to live in your day bag. Uniqlo's Blocktech is excellent and cheap if buying in Tokyo.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Running kit — Trish</strong> × 6–7 sets <small>One per morning (approximately). Quick-dry fabric. Running tights or shorts depending on preference for different temperatures.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Quick-dry underwear</strong> × 5–6 <small>ExOfficio or Smartwool — dry overnight, pack small, essential for 12 days without full laundry</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Lightweight socks</strong> × 6 pairs <small>Important: wear socks you don't mind removing in public — many ryokan, some restaurants, and temples require shoes off</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Sun hat or cap</strong> × 1 <small>Tokyo and Osaka in July are intense — a wide-brim hat or cap makes walking in direct sun much more bearable</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Small quick-dry travel towel</strong> × 1 each <span class="badge badge-jp">Onsen</span><small>Ryokan provide towels but a small personal towel is useful between onsens and for day travel. Don't bring a large bath towel.</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── CLOTHING: LONDON ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧥</span>
+      <span class="section-title">Clothing — London</span>
+      <span class="section-count" id="count-uk-clothes"></span>
+    </div>
+    <div class="climate-note"><strong>London in July:</strong> Mild and variable — 18–25°C but evenings can drop to 14°C. Rain is always possible regardless of forecast. The key word is layers. You'll go from sunny afternoons to cool breezy evenings within the same day.</div>
+    <div class="checklist-group" id="uk-clothes">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Light long-sleeve shirts or blouses</strong> × 3–4 <small>Can layer under a jacket for evenings with friends — smarter than t-shirts for dinners at Tayyabs, Dishoom, and the South Kensington cousin</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>One smart casual outfit (evening)</strong> × 1 <small>For Alan &amp; YY dinner (Shoreditch), Coleen &amp; Harry, and the cousin. London evenings with friends don't require anything formal.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Light jeans or chinos</strong> × 1–2 <small>More appropriate than shorts for London evenings and York/Oxford day trips</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Rain jacket</strong> × 1 (each) <small>Non-negotiable in London. If you packed one for Japan it doubles here — just make sure it's waterproof, not just water-resistant.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Compact umbrella</strong> × 1 <small>The London backup. Fits in a day bag. Buy a good one — cheap ones invert in London wind.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Lightweight mid-layer / sweater</strong> × 1 <small>For cool London evenings, the Oxford and York day trips, and the WB Studio Tour (indoor but large and sometimes cold)</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Running kit continues — Trish</strong> <small>Same kit from Japan carries through. London runs: Victoria Embankment, Hyde Park, Regent's Park, York city walls.</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── SHOES ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">👟</span>
+      <span class="section-title">Shoes</span>
+      <span class="section-count" id="count-shoes"></span>
+    </div>
+    <div class="climate-note"><strong>Japan shoe rule:</strong> You will remove your shoes frequently — at ryokan, some restaurants, and some temples. Avoid shoes with complicated laces or hard-to-remove buckles. Slip-ons or easy pull-on shoes save you time and embarrassment at least once a day. You'll also walk 15,000–20,000 steps on busy Tokyo days.</div>
+    <div class="checklist-group" id="shoes">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Supportive walking shoes</strong> × 1 pair <span class="badge badge-rec">Most important</span><small>Hoka Clifton, ASICS Gel-Nimbus, or New Balance 327. Must handle 20,000+ steps/day comfortably. Break them in before the trip. Easy to slip on/off for Japan.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Running shoes — Trish</strong> × 1 pair <small>These will do double duty as walking shoes on some days. Already broken in.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Smart casual shoes or clean leather sneakers</strong> × 1 pair <small>For the Tokyo omakase dinner, London evenings with friends, and the Ampersand Hotel bar. Loafers are ideal — they look smart and slip off easily in Japan.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Sandals or lightweight flip-flops</strong> × 1 pair <small>For walking between ryokan rooms and the onsen, and hot Tokyo/Osaka days when you're not doing serious walking</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── HEALTH & TOILETRIES ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧴</span>
+      <span class="section-title">Health &amp; Toiletries</span>
+      <span class="section-count" id="count-health"></span>
+    </div>
+    <div class="climate-note">Japan has excellent pharmacy chains (Matsumoto Kiyoshi, Sundrug) everywhere if you forget anything. Many toiletries are cheaper and higher quality in Japan — sunscreen and skincare especially.</div>
+    <div class="checklist-group" id="health">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Prescription medications</strong> <small>Bring enough for the full trip plus a few days extra. Some medications legal in the US are restricted in Japan — check with the Japanese Embassy if uncertain.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>High SPF sunscreen (50+)</strong> <small>Tokyo July sun is intense. Japanese drugstores sell excellent SPF50+ sunscreen cheaply — buy more there if needed.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Blister plasters / Compeed</strong> <span class="badge badge-rec">Don't forget</span><small>With 15,000+ steps/day in new terrain, blisters are near-certain without prevention. Pack 10+ plasters.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Pain relievers (ibuprofen, paracetamol)</strong> <small>Good for jet lag headaches and post-hiking aches</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Antihistamines</strong> <small>Summer Japan has significant pollen. London in July too.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Wet wipes / hand sanitiser</strong> <span class="badge badge-jp">Japan</span><small>Many Japanese public toilets don't have hand dryers or paper towels — a pack of wet wipes is useful</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Insect repellent</strong> <span class="badge badge-jp">Japan</span><small>Summer Japan — especially Tohoku forests (Naruko Gorge, Ginzan) — has mosquitoes in the evenings</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Travel-size toiletries</strong> <small>Shampoo, conditioner, body wash for the non-ryokan nights. Ryokan provide everything.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Lip balm with SPF</strong> <small>Easily forgotten, constantly needed in dry airplane cabins and sunny city days</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Portable fan</strong> <span class="badge badge-jp">Japan</span><small>Small battery-powered or USB fan — genuinely transformative in Tokyo July heat. Buy at a convenience store in Japan on Day 1 if you don't want to pack one.</small></div></label>
+    </div>
+  </div>
+
+  <!-- ── JAPAN ESSENTIALS ── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🎌</span>
+      <span class="section-title">Japan Essentials</span>
+      <span class="section-count" id="count-jp-extra"></span>
+    </div>
+    <div class="checklist-group" id="jp-extra">
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Cash — Japanese yen</strong> <span class="badge badge-rec">Important</span><small>Japan is still significantly cash-based. Many small restaurants, temples, and rural spots are cash-only. Withdraw at 7-Eleven or Japan Post ATMs (most reliable for foreign cards). Have at least ¥30,000–50,000 on you at all times in Tohoku.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Small day backpack or tote</strong> <small>For carrying water, camera, power bank, rain jacket, and purchases throughout the day. A packable tote from Muji or similar.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Reusable water bottle</strong> <small>Vending machines are everywhere in Japan (¥150 a bottle) but a good insulated bottle saves money and keeps drinks cold in the heat</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Onsen etiquette checked</strong> <span class="badge badge-tip">Read before going</span><small>For kashikiri (private) baths: no swimwear needed, rinse before entering, no soap in the bath, don't submerge towel. Tattoo policies vary — kashikiri avoids any concerns.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Kokeshi doll &amp; Omamori charm</strong> <span class="badge badge-tip">For Alan &amp; YY's baby</span><small>Buy in Sendai or Ginzan area (Tohoku is the home of kokeshi dolls). An Omamori child-safety charm from a temple you visit. Meaningful and unique.</small></div></label>
+      <label class="item"><input type="checkbox"><div class="check-box"></div><div class="item-text"><strong>Small ziplock bags</strong> <small>For wet swimwear, snacks, and organising a Japan day bag. Surprisingly useful.</small></div></label>
+    </div>
+  </div>
+
+</div><!-- end .content -->
+
+<!-- ── eSIM SECTION ── -->
+<div class="esim-section" style="margin-left:0;margin-right:0;padding-left:48px;padding-right:48px;">
+  <div class="esim-section-header">
+    <div class="esim-section-title">📱 Data &amp; eSIMs</div>
+    <div class="esim-section-sub">Two eSIMs per person · No pocket WiFi needed</div>
+  </div>
+  <p class="esim-verdict">
+    <strong>Two eSIMs each, not a shared pocket WiFi.</strong> Since Trish runs solo every morning and you'll regularly split up during the day, independent connectivity is essential. eSIM is also significantly cheaper — roughly $90 total for both of you across both countries, versus $200+ for pocket WiFi rentals or carrier day passes.
+  </p>
+
+  <div class="esim-grid">
+    <div class="esim-card">
+      <div class="esim-card-flag">🇯🇵</div>
+      <div class="esim-card-title">Japan eSIM</div>
+      <div class="esim-card-dates">Jul 2 – 13 · 12 days</div>
+      <div class="esim-rec-label">Recommended</div>
+      <div class="esim-row top">
+        <div class="esim-row-name">Airalo — 20GB / 30 days<small>SoftBank + KDDI · best value for fixed data</small></div>
+        <div class="esim-row-price">~$25<small>/person</small></div>
+      </div>
+      <div class="esim-row">
+        <div class="esim-row-name">Roafly — 20GB / 30 days<small>NTT Docomo · strongest Tohoku rural coverage</small></div>
+        <div class="esim-row-price">~$22<small>/person</small></div>
+      </div>
+      <div class="esim-row">
+        <div class="esim-row-name">Holafly — unlimited / 15 days<small>No data tracking · premium price</small></div>
+        <div class="esim-row-price">~$51<small>/person</small></div>
+      </div>
+      <div class="esim-note">Roafly runs on NTT Docomo — the carrier with the strongest tunnel and rural coverage. Recommended specifically for Naruko Gorge, Zao, and Ginzan. Buy at <a href="https://www.airalo.com/" target="_blank">airalo.com</a> or <a href="https://www.roafly.com/" target="_blank">roafly.com</a>.</div>
+    </div>
+
+    <div class="esim-card">
+      <div class="esim-card-flag">🇬🇧</div>
+      <div class="esim-card-title">UK eSIM</div>
+      <div class="esim-card-dates">Jul 14 – 24 · 10 days</div>
+      <div class="esim-rec-label">Recommended</div>
+      <div class="esim-row top">
+        <div class="esim-row-name">Saily — 10GB / 30 days<small>EE + Three networks · best value per GB</small></div>
+        <div class="esim-row-price">~$19<small>/person</small></div>
+      </div>
+      <div class="esim-row">
+        <div class="esim-row-name">Airalo — 10GB / 30 days<small>EE network · same app as Japan eSIM</small></div>
+        <div class="esim-row-price">~$23<small>/person</small></div>
+      </div>
+      <div class="esim-row">
+        <div class="esim-row-name">Holafly — unlimited / 10 days<small>Hotspot capped at 500MB/day</small></div>
+        <div class="esim-row-price">~$30<small>/person</small></div>
+      </div>
+      <div class="esim-note">10GB is plenty — both hotels have strong WiFi. Buy at <a href="https://www.saily.com/" target="_blank">saily.com</a> or <a href="https://www.airalo.com/" target="_blank">airalo.com</a>.</div>
+    </div>
+  </div>
+
+  <div class="esim-bottom">
+    <div class="esim-box">
+      <div class="esim-box-title">💰 Cost comparison — both people, full trip</div>
+      <div class="cost-row win"><span class="cost-label">2× eSIMs each (recommended)</span><span class="cost-val">~$90 total</span></div>
+      <div class="cost-row"><span class="cost-label">Pocket WiFi — Japan only</span><span class="cost-val">$100–130</span></div>
+      <div class="cost-row"><span class="cost-label">Verizon TravelPass ($10/day)</span><span class="cost-val">$220+</span></div>
+      <div class="cost-row"><span class="cost-label">AT&amp;T International Day Pass</span><span class="cost-val">$220+</span></div>
+    </div>
+
+    <div class="esim-box">
+      <div class="esim-box-title">📋 Setup checklist</div>
+      <div class="setup-step"><div class="step-num">1</div><span><strong style="color:#f4f1eb;">Before leaving:</strong> Install Japan eSIM on both phones — don't activate yet.</span></div>
+      <div class="setup-step"><div class="step-num">2</div><span><strong style="color:#f4f1eb;">Landing at HND (Jul 2):</strong> Toggle Japan eSIM on. Activates automatically.</span></div>
+      <div class="setup-step"><div class="step-num">3</div><span><strong style="color:#f4f1eb;">Landing at LHR (Jul 14):</strong> Toggle Japan eSIM off, install and activate UK eSIM.</span></div>
+      <div class="setup-step"><div class="step-num">4</div><span><strong style="color:#f4f1eb;">Keep US SIM in dual-SIM mode</strong> — your number stays reachable the whole trip.</span></div>
+    </div>
+  </div>
+
+  <div class="compat-note">
+    <strong>Phone compatibility:</strong> eSIM works on any iPhone XS (2018) or newer — all US iPhone 14 models are eSIM-only. Android: Google Pixel 3+, Samsung Galaxy S20+, and most 2020+ flagships. If you're on T-Mobile Magenta or Go5G, you already get free (throttled) international data in both Japan and the UK — useful as a fallback but too slow for navigation on its own.
+  </div>
+</div>
+
+<div class="page-footer" style="margin-left:48px;margin-right:48px;">
+  <p>Summer 2026 &nbsp;·&nbsp; <a href="japan.html" style="color:#7a7570;">Japan itinerary</a> &nbsp;·&nbsp; <a href="london.html" style="color:#7a7570;">London itinerary</a> &nbsp;·&nbsp; <a href="index.html" style="color:#7a7570;">Home</a></p>
+</div>
+
+<script>
+  const STORE_KEY = 'checklist-2026';
+
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveState(state) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {}
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.item');
+    const checked = document.querySelectorAll('.item.checked');
+    const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+    document.getElementById('progress-label').textContent = `${checked.length} / ${all.length} packed`;
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    // Section counts
+    document.querySelectorAll('.checklist-group').forEach(group => {
+      const id = group.id;
+      const total = group.querySelectorAll('.item').length;
+      const done  = group.querySelectorAll('.item.checked').length;
+      const el = document.getElementById('count-' + id.replace('-clothes','').replace('-extra','').replace('-','').replace('jp','jp-').replace('uk','uk-'));
+      // simpler: find the count span in the same section
+      const section = group.closest('.section');
+      if (section) {
+        const countEl = section.querySelector('.section-count');
+        if (countEl) countEl.textContent = `${done}/${total}`;
+      }
+    });
+  }
+
+  function initChecklist() {
+    const state = getState();
+    document.querySelectorAll('.checklist-group').forEach(group => {
+      group.querySelectorAll('.item').forEach((item, i) => {
+        const key = group.id + '-' + i;
+        if (state[key]) item.classList.add('checked');
+        item.addEventListener('click', () => {
+          item.classList.toggle('checked');
+          const s = getState();
+          s[key] = item.classList.contains('checked');
+          saveState(s);
+          updateProgress();
+        });
+      });
+    });
+    updateProgress();
+  }
+
+  function resetAll() {
+    if (!confirm('Reset all checkboxes?')) return;
+    document.querySelectorAll('.item').forEach(i => i.classList.remove('checked'));
+    saveState({});
+    updateProgress();
+  }
+
+  document.addEventListener('DOMContentLoaded', initChecklist);
+</script>
+</body>
+</html>
