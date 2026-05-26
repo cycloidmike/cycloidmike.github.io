@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Packing Checklist — Summer 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,6 +30,7 @@
   .progress-label { font-size: 13px; font-weight: 500; white-space: nowrap; min-width: 100px; }
   .progress-track { flex: 1; height: 6px; background: rgba(0,0,0,0.12); border-radius: 3px; overflow: hidden; }
   .progress-fill { height: 100%; background: #2d6a2d; border-radius: 3px; transition: width 0.3s ease; }
+  #sync-status { font-size: 11px; font-weight: 500; white-space: nowrap; transition: opacity 0.5s ease; min-width: 120px; text-align: right; }
   .reset-btn { font-size: 11px; color: #7a7570; background: none; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; padding: 4px 10px; cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
   .reset-btn:hover { border-color: rgba(0,0,0,0.3); color: #444; }
 
@@ -138,6 +140,7 @@
 <div class="progress-bar-wrap">
   <div class="progress-label" id="progress-label">0 / 0 packed</div>
   <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <span id="sync-status" style="opacity:0;"></span>
   <button class="reset-btn" onclick="resetAll()">Reset all</button>
 </div>
 
@@ -367,60 +370,177 @@
 </div>
 
 <script>
-  const STORE_KEY = 'checklist-2026';
+  // ── CONFIG — paste your values from Supabase → Settings → API ────────────
+  const SUPABASE_URL     = 'https://bduoxhfhchbwatjlnvvt.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkdW94aGZoY2hid2F0amxudnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NTk3NjIsImV4cCI6MjA5NTMzNTc2Mn0.N8RY0x9FMbKk1FaeLVqZOS1YY0kHZisIJJTZw992O6M';
+  const TRIP_ID          = '13aae4f6-12be-43db-833e-4d9fcf7c071e';
+  // ─────────────────────────────────────────────────────────────────────────
 
-  function getState() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
-  }
-  function saveState(state) {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {}
-  }
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let localState = {};
 
-  function updateProgress() {
-    const all = document.querySelectorAll('.item');
-    const checked = document.querySelectorAll('.item.checked');
-    const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
-    document.getElementById('progress-label').textContent = `${checked.length} / ${all.length} packed`;
-    document.getElementById('progress-fill').style.width = pct + '%';
-
-    // Section counts
-    document.querySelectorAll('.checklist-group').forEach(group => {
-      const id = group.id;
-      const total = group.querySelectorAll('.item').length;
-      const done  = group.querySelectorAll('.item.checked').length;
-      const el = document.getElementById('count-' + id.replace('-clothes','').replace('-extra','').replace('-','').replace('jp','jp-').replace('uk','uk-'));
-      // simpler: find the count span in the same section
-      const section = group.closest('.section');
-      if (section) {
-        const countEl = section.querySelector('.section-count');
-        if (countEl) countEl.textContent = `${done}/${total}`;
-      }
-    });
+  // ── LOAD all checked items from Supabase ─────────────────────────────────
+  async function loadState() {
+    try {
+      const { data, error } = await db
+        .from('checklist_state')
+        .select('item_key, checked')
+        .eq('trip_id', TRIP_ID);
+      if (error) throw error;
+      const state = {};
+      (data || []).forEach(r => { state[r.item_key] = r.checked; });
+      return state;
+    } catch (err) {
+      console.warn('Supabase load failed — falling back to localStorage:', err);
+      showSyncStatus('⚠️ Offline mode', '#c0392b');
+      try { return JSON.parse(localStorage.getItem('checklist-2026')) || {}; } catch { return {}; }
+    }
   }
 
-  function initChecklist() {
-    const state = getState();
+  // ── SAVE a single item ────────────────────────────────────────────────────
+  async function saveItem(key, checked) {
+    localState[key] = checked;
+    // Fallback: always write to localStorage too
+    try {
+      localStorage.setItem('checklist-2026', JSON.stringify(localState));
+    } catch {}
+    // Primary: write to Supabase
+    try {
+      const { error } = await db.from('checklist_state').upsert({
+        trip_id: TRIP_ID,
+        item_key: key,
+        checked,
+        updated_at: new Date().toISOString()
+      });
+      if (error) throw error;
+      flashSync();
+    } catch (err) {
+      console.warn('Supabase save failed:', err);
+      showSyncStatus('⚠️ Saved locally only', '#c0392b');
+    }
+  }
+
+  // ── RESET all items ────────────────────────────────────────────────────────
+  async function resetAll() {
+    if (!confirm('Reset all checkboxes on all devices?')) return;
+    document.querySelectorAll('.item').forEach(el => el.classList.remove('checked'));
+    localState = {};
+    updateProgress();
+    try { localStorage.removeItem('checklist-2026'); } catch {}
+    try {
+      await db.from('checklist_state').delete().eq('trip_id', TRIP_ID);
+    } catch (err) {
+      console.warn('Supabase reset failed:', err);
+    }
+  }
+
+  // ── APPLY state object to DOM ─────────────────────────────────────────────
+  function applyState(state) {
+    localState = state;
     document.querySelectorAll('.checklist-group').forEach(group => {
       group.querySelectorAll('.item').forEach((item, i) => {
         const key = group.id + '-' + i;
-        if (state[key]) item.classList.add('checked');
-        item.addEventListener('click', () => {
-          item.classList.toggle('checked');
-          const s = getState();
-          s[key] = item.classList.contains('checked');
-          saveState(s);
-          updateProgress();
-        });
+        item.classList.toggle('checked', !!state[key]);
       });
     });
     updateProgress();
   }
 
-  function resetAll() {
-    if (!confirm('Reset all checkboxes?')) return;
-    document.querySelectorAll('.item').forEach(i => i.classList.remove('checked'));
-    saveState({});
-    updateProgress();
+  // ── PROGRESS BAR & SECTION COUNTS ────────────────────────────────────────
+  function updateProgress() {
+    const all     = document.querySelectorAll('.item');
+    const checked = document.querySelectorAll('.item.checked');
+    const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+    document.getElementById('progress-label').textContent =
+      `${checked.length} / ${all.length} packed`;
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    document.querySelectorAll('.checklist-group').forEach(group => {
+      const section = group.closest('.section');
+      if (!section) return;
+      const total = group.querySelectorAll('.item').length;
+      const done  = group.querySelectorAll('.item.checked').length;
+      const el = section.querySelector('.section-count');
+      if (el) el.textContent = `${done}/${total}`;
+    });
+  }
+
+  // ── SYNC STATUS indicator ─────────────────────────────────────────────────
+  function showSyncStatus(msg, color = '#2d6a2d') {
+    const el = document.getElementById('sync-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = color;
+    el.style.opacity = '1';
+  }
+  function flashSync() {
+    showSyncStatus('✓ Synced', '#2d6a2d');
+    setTimeout(() => {
+      const el = document.getElementById('sync-status');
+      if (el) el.style.opacity = '0';
+    }, 1800);
+  }
+
+  // ── REALTIME: listen for changes from Trish's device ─────────────────────
+  function subscribeRealtime() {
+    db.channel('checklist-live')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'checklist_state',
+        filter: `trip_id=eq.${TRIP_ID}`
+      }, payload => {
+        if (!payload.new) return;
+        const { item_key, checked } = payload.new;
+        localState[item_key] = checked;
+        // Find the matching item in the DOM and update it
+        let found = false;
+        document.querySelectorAll('.checklist-group').forEach(group => {
+          group.querySelectorAll('.item').forEach((item, i) => {
+            if (group.id + '-' + i === item_key) {
+              item.classList.toggle('checked', checked);
+              found = true;
+            }
+          });
+        });
+        if (found) {
+          updateProgress();
+          showSyncStatus('↕ Updated from other device', '#185FA5');
+          setTimeout(() => {
+            const el = document.getElementById('sync-status');
+            if (el) el.style.opacity = '0';
+          }, 2500);
+        }
+      })
+      .subscribe();
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  async function initChecklist() {
+    showSyncStatus('Syncing…', '#7a7570');
+
+    const state = await loadState();
+    applyState(state);
+
+    // Attach click handlers to every item
+    document.querySelectorAll('.checklist-group').forEach(group => {
+      group.querySelectorAll('.item').forEach((item, i) => {
+        const key = group.id + '-' + i;
+        item.addEventListener('click', async () => {
+          item.classList.toggle('checked');
+          updateProgress();
+          await saveItem(key, item.classList.contains('checked'));
+        });
+      });
+    });
+
+    subscribeRealtime();
+    showSyncStatus('✓ Synced', '#2d6a2d');
+    setTimeout(() => {
+      const el = document.getElementById('sync-status');
+      if (el) el.style.opacity = '0';
+    }, 2000);
   }
 
   document.addEventListener('DOMContentLoaded', initChecklist);
