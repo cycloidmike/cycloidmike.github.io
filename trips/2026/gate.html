@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer 2026 Trip</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a18;
+    color: #f4f1eb;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle background texture */
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(44,62,80,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Faint background text */
+  .bg-text {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 18vw, 200px);
+    font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .flags {
+    font-size: 32px;
+    letter-spacing: 8px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: rgba(244,241,235,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 14px;
+  }
+
+  input[type="password"] {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    color: #f4f1eb;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 14px 48px 14px 18px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+  input[type="password"]::placeholder { color: rgba(244,241,235,0.3); }
+  input[type="password"]:focus {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+  }
+  input[type="password"].error {
+    border-color: rgba(192,57,43,0.7);
+    background: rgba(192,57,43,0.07);
+  }
+
+  /* Show/hide password toggle */
+  .toggle-pw {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(244,241,235,0.35);
+    font-size: 16px;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+  .toggle-pw:hover { color: rgba(244,241,235,0.7); }
+
+  button[type="submit"] {
+    width: 100%;
+    background: #f4f1eb;
+    color: #1a1a18;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.15s, transform 0.1s;
+    margin-top: 4px;
+  }
+  button[type="submit"]:hover { background: #fff; }
+  button[type="submit"]:active { transform: scale(0.98); }
+
+  .remember {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px 0 4px;
+    font-size: 12px;
+    color: rgba(244,241,235,0.45);
+    cursor: pointer;
+    user-select: none;
+  }
+  .remember input[type="checkbox"] { accent-color: #f4f1eb; cursor: pointer; }
+
+  .error-msg {
+    font-size: 12px;
+    color: rgba(192,57,43,0.9);
+    margin-top: 10px;
+    min-height: 18px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .error-msg.show { opacity: 1; transform: translateY(0); }
+
+  .footer-note {
+    margin-top: 36px;
+    font-size: 11px;
+    color: rgba(244,241,235,0.2);
+    letter-spacing: 0.5px;
+  }
+
+  /* Loading state */
+  button[type="submit"].loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  button[type="submit"].loading::after {
+    content: ' ·';
+    animation: dots 1s steps(3, end) infinite;
+  }
+  @keyframes dots {
+    0%   { content: ' ·'; }
+    33%  { content: ' · ·'; }
+    66%  { content: ' · · ·'; }
+    100% { content: ' ·'; }
+  }
+
+  /* Success flash */
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; transform: scale(0.97); }
+  }
+  .card.success { animation: fadeOut 0.4s ease forwards; }
+</style>
+</head>
+<body>
+
+<div class="bg-text">2026</div>
+
+<div class="card" id="card">
+  <div class="flags">🇯🇵 🇬🇧</div>
+  <h1>Japan &amp; London</h1>
+  <div class="subtitle">Summer 2026 · Private trip site</div>
+
+  <form id="gate-form" onsubmit="checkPassword(event)" novalidate>
+    <div class="input-wrap">
+      <input
+        type="password"
+        id="pw-input"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        autofocus
+      />
+      <button type="button" class="toggle-pw" onclick="toggleVisibility()" id="toggle-btn" aria-label="Show password">👁</button>
+    </div>
+
+    <label class="remember">
+      <input type="checkbox" id="remember-me" checked>
+      Keep me signed in
+    </label>
+
+    <button type="submit" id="submit-btn">Enter</button>
+    <div class="error-msg" id="error-msg">Incorrect password — try again</div>
+  </form>
+
+  <div class="footer-note">Michael &amp; Trish · July 2026</div>
+</div>
+
+<script>
+  // ── CONFIG ────────────────────────────────────────────────────────────────
+  // SHA-256 hash of the password. To change:
+  // Open browser console and run:
+  //   const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('yourpassword'));
+  //   console.log(Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join(''));
+  // Paste the output below.
+  const PASSWORD_HASH = '1a2d3e3e226b8c72dccb920c5b2f4ef7fcd7c4a58a9e26c44d7d0ca8f65cdd32';
+  const SESSION_KEY   = 'trip-auth-2026';
+  const REDIRECT_TO   = 'index.html';
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // If already authenticated, skip gate
+  if (sessionStorage.getItem(SESSION_KEY) === 'granted' ||
+      localStorage.getItem(SESSION_KEY) === 'granted') {
+    window.location.replace(REDIRECT_TO);
+  }
+
+  async function sha256(str) {
+    const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword(e) {
+    e.preventDefault();
+    const input  = document.getElementById('pw-input');
+    const btn    = document.getElementById('submit-btn');
+    const errMsg = document.getElementById('error-msg');
+
+    btn.classList.add('loading');
+    btn.textContent = 'Checking';
+    input.classList.remove('error');
+    errMsg.classList.remove('show');
+
+    const hash = await sha256(input.value.trim());
+
+    if (hash === PASSWORD_HASH) {
+      // Correct — store auth token
+      const remember = document.getElementById('remember-me').checked;
+      if (remember) {
+        localStorage.setItem(SESSION_KEY, 'granted');
+      } else {
+        sessionStorage.setItem(SESSION_KEY, 'granted');
+      }
+      document.getElementById('card').classList.add('success');
+      setTimeout(() => window.location.replace(REDIRECT_TO), 380);
+    } else {
+      // Wrong password
+      btn.classList.remove('loading');
+      btn.textContent = 'Enter';
+      input.classList.add('error');
+      input.value = '';
+      input.focus();
+      errMsg.classList.add('show');
+      // Shake the card
+      document.getElementById('card').style.animation = 'shake 0.3s ease';
+      setTimeout(() => document.getElementById('card').style.animation = '', 300);
+    }
+  }
+
+  function toggleVisibility() {
+    const input = document.getElementById('pw-input');
+    const btn   = document.getElementById('toggle-btn');
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁';
+    }
+  }
+
+  // Add shake animation dynamically
+  const style = document.createElement('style');
+  style.textContent = `@keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-5px)}
+    80%{transform:translateX(5px)}
+  }`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
