@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Auth gate — redirect to gate.html if not authenticated
+  (function() {
+    const KEY = 'trip-auth-2026';
+    if (sessionStorage.getItem(KEY) !== 'granted' && localStorage.getItem(KEY) !== 'granted') {
+      window.location.replace('gate.html');
+    }
+  })();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>London — July 2026</title>
